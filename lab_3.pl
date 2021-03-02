@@ -52,3 +52,9 @@ min_num_down(N,X):-min_num_down(N,10,X1),(X1=10->fail;X is X1).
 min_num_down(0,Cur_X,Cur_X):-!.
 min_num_down(N,Cur_X,X):-N1 is N div 10,N2 is N mod 10,1 is N2 mod 2,Cur_X>N2,min_num_down(N1,N2,X),!.
 min_num_down(N,Cur_X,X):-N1 is N div 10,min_num_down(N1,Cur_X,X).
+
+%12_2
+prost(X):-prost(X,2).
+prost(X,X):-!.
+prost(X,I):-not(0 is X mod I),I1 is I+1,prost(X,I1),!.
+prost(_,_):-fail.
