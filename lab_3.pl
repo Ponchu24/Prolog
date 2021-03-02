@@ -37,3 +37,9 @@ fib1(N,X1,Y1,X):-Cur_X is X1+Y1,N1 is N-1,fib1(N1,Cur_X,X1,X).
 %7
 max_num_up(0,0):-!.
 max_num_up(N,X1):-N1 is N div 10,max_num_up(N1,X),(X<N mod 10 -> X1 is N mod 10;X1 is X).
+
+%8
+max_num_down(N,X):-max_num_down(N,0,X).
+max_num_down(0,Cur_X,Cur_X):-!.
+max_num_down(N,Cur_X,X):-X1 is N mod 10,Cur_X<X1,N1 is N div 10,max_num_down(N1,X1,X),!.
+max_num_down(N,Cur_X,X):-N1 is N div 10,max_num_down(N1,Cur_X,X).
