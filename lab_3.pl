@@ -58,3 +58,10 @@ prost(X):-prost(X,2).
 prost(X,X):-!.
 prost(X,I):-not(0 is X mod I),I1 is I+1,prost(X,I1),!.
 prost(_,_):-fail.
+
+%12_1
+nod(X1,X2,_):-(X1 is 0;X2 is 0),!,fail.
+nod(X1,X2,X2):-X1>X2,0 is X1 mod X2,!.
+nod(X1,X2,N):-X1>X2,X3 is X1 mod X2,nod(X3,X2,N),!.
+nod(X1,X2,X1):-0 is X2 mod X1,!.
+nod(X1,X2,N):-X3 is X2 mod X1,nod(X1,X3,N),!.
