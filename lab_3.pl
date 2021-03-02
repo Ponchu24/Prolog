@@ -71,3 +71,12 @@ kolvo_del(N,X):-kolvo_del(N,1,1,X).
 kolvo_del(N,N,Cur_X,Cur_X):-!.
 kolvo_del(N,I,Cur_X,X):-0 is N mod I,X1 is Cur_X+1,I1 is I+1,kolvo_del(N,I1,X1,X),!.
 kolvo_del(N,I,Cur_X,X):-I1 is I+1,kolvo_del(N,I1,Cur_X,X),!.
+
+%13
+
+%14
+
+kolvo_del_up3(N,X):-kolvo_del_up3(N,N,X).
+kolvo_del_up3(_,0,0):-!.
+kolvo_del_up3(N,I,X):-I1 is I-1,kolvo_del_up3(N,I1,X1),((0 is N mod I,not(0 is I mod 3))->X is X1+1;X is X1).
+
