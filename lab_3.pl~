@@ -78,7 +78,7 @@ xz(N,Cur_N,_,Cur_N):-N>=1000000,!.
 xz(N,_,Cur_Dl,Res_N):-xz(N,0,Dl),Dl>Cur_Dl,Cur_Dl1 is Dl,Cur_N1 is N,N1 is N+1,xz(N1,Cur_N1,Cur_Dl1,Res_N),!.
 xz(N,Cur_N,Cur_Dl,Res_N):-N1 is N+1,xz(N1,Cur_N,Cur_Dl,Res_N).
 xz(1,Cur_N,Dl):-Dl is Cur_N+1,!.
-xz(N,Cur_N,Dl):-Cur_N1 is Cur_N+1,N1 is N mod 2,(N1=0->N2 is N div 2;N2 is 3*N+1),xz(N2,Cur_N1,Dl).
+xz(N,Cur_N,Dl):-Cur_N1 is Cur_N+1,N1 is N mod 2,(N1=0->N2 is N div 2;N2 is 3*N+1),xz(N,Cur_N1,Dl).
 
 %14
 
