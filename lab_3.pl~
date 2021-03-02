@@ -23,8 +23,13 @@ sum1(N,X):-sum1(N,0,X).
 sum1(0,X,X):-!.
 sum1(A,X1,X):-A1 is A mod 10,A2 is A div 10,X2 is X1+A1,sum1(A2,X2,X).
 
-%4
-fib(N,X):-N=1,X is 1.
+%5
+fib(N,X):-N=1,X is 1,!.
 fib(N,X):-fib(N,X,_).
 fib(2,1,1):-!.
 fib(N,X,Y):-N1 is N-1,fib(N1,X1,Y1),X is X1+Y1,Y is X1.
+
+%6
+fib1(N,X):-fib1(N,1,1,X).
+fib1(2,X1,_,X1):-!.
+fib1(N,X1,Y1,X):-Cur_X is X1+Y1,N1 is N-1,fib(N1,Cur_X,X1,X).
