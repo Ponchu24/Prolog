@@ -69,7 +69,7 @@ nod(X1,X2,N):-X3 is X2 mod X1,nod(X1,X3,N),!.
 %12_3
 kolvo_del(N,X):-kolvo_del(N,1,1,X).
 kolvo_del(N,N,Cur_X,Cur_X):-!.
-kolvo_del(N,I,Cur_X,X):-0 is N mod I,X1 is Cur_X+1,I1 is I+1,kolvo_del(N,I1,X1,X),!.
+kolvo_del(N,I,Cur_X,X):-0 is N mod I,X1 is Cur_X+1,write(I),nl,I1 is I+1,kolvo_del(N,I1,X1,X),!.
 kolvo_del(N,I,Cur_X,X):-I1 is I+1,kolvo_del(N,I1,Cur_X,X),!.
 
 %13
@@ -80,8 +80,15 @@ kolvo_del_up3(N,X):-kolvo_del_up3(N,N,X).
 kolvo_del_up3(_,0,0):-!.
 kolvo_del_up3(N,I,X):-I1 is I-1,kolvo_del_up3(N,I1,X1),((0 is N mod I,not(0 is I mod 3))->X is X1+1;X is X1).
 
-kolvo_del_down3(N,X):-kolvo_del_down3(N,1,0,X).
+kolvo_del_down3(N,X):-kolvo_del_down3(N,0,1,X).
 kolvo_del_down3(N,N,Cur_X,Cur_X):-!.
 kolvo_del_down3(N,I,Cur_X,X):-not(0 is I mod 3),0 is N mod I,I1 is I+1,X1 is Cur_X+1,kolvo_del_down3(N,I1,X1,X),!.
 kolvo_del_down3(N,I,Cur_X,X):-I1 is I+1,kolvo_del_down3(N,I1,Cur_X,X).
+
+%15
+
+kolvo_del_sum(N,X):-sum(N,Sum_N),kolvo_del_sum(N,Sum_N,1,1,X).
+kolvo_del_sum(N,_,Cur_X,N,Cur_X):-!.
+kolvo_del_sum(N,Sum_N,Cur_X,I,X):-0 is N mod I,sum(I,Sum_I),I1 is I+1,Sum_I<Sum_N,X1 is Cur_X*I,write(I),nl,kolvo_del_sum(N,Sum_N,X1,I1,X),!.
+kolvo_del_sum(N,Sum_N,Cur_X,I,X):-I1 is I+1,kolvo_del_sum(N,Sum_N,Cur_X,I1,X).
 
