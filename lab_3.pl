@@ -65,3 +65,9 @@ nod(X1,X2,X2):-X1>X2,0 is X1 mod X2,!.
 nod(X1,X2,N):-X1>X2,X3 is X1 mod X2,nod(X3,X2,N),!.
 nod(X1,X2,X1):-0 is X2 mod X1,!.
 nod(X1,X2,N):-X3 is X2 mod X1,nod(X1,X3,N),!.
+
+%12_3
+kolvo_del(N,X):-kolvo_del(N,1,1,X).
+kolvo_del(N,N,Cur_X,Cur_X):-!.
+kolvo_del(N,I,Cur_X,X):-0 is N mod I,X1 is Cur_X+1,I1 is I+1,kolvo_del(N,I1,X1,X),!.
+kolvo_del(N,I,Cur_X,X):-I1 is I+1,kolvo_del(N,I1,Cur_X,X),!.
