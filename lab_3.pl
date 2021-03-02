@@ -85,3 +85,14 @@ kolvo_del_down3(N,N,Cur_X,Cur_X):-!.
 kolvo_del_down3(N,I,Cur_X,X):-not(0 is I mod 3),0 is N mod I,I1 is I+1,X1 is Cur_X+1,kolvo_del_down3(N,I1,X1,X),!.
 kolvo_del_down3(N,I,Cur_X,X):-I1 is I+1,kolvo_del_down3(N,I1,Cur_X,X).
 
+%15
+
+mult(N,X):-mult(N,1,X).
+mult(0,X,X):-!.
+mult(N,Cur_X,X):-N1 is N mod 10,N2 is N div 10,X1 is Cur_X*N1,mult(N2,X1,X).
+
+kolvo_del_prost(N,X):-sum(N,Sum_N),mult(N,Mult_N),kolvo_del_prost(N,Sum_N,Mult_N,1,0,X).
+kolvo_del_prost(N,_,_,N,Cur_X,Cur_X):-!.
+kolvo_del_prost(N,Sum_N,Mult_N,I,Cur_X,X):-0 is N mod I,I1 is I+1,nod(Sum_N,I,Prost),nod(Mult_N,I,Ne_prost),Prost=1,Ne_prost\=1,X1 is Cur_X+I,kolvo_del_prost(N,Sum_N,Mult_N,I1,X1,X),!.
+kolvo_del_prost(N,Sum_N,Mult_N,I,Cur_X,X):-I1 is I+1,kolvo_del_prost(N,Sum_N,Mult_N,I1,Cur_X,X).
+
