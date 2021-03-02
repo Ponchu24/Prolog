@@ -47,3 +47,8 @@ max_num_down(N,Cur_X,X):-N1 is N div 10,max_num_down(N1,Cur_X,X).
 %11
 min_num_up(0,10):-!.
 min_num_up(N,X1):-N1 is N div 10,min_num_up(N1,X),N2 is N mod 10,((1 is N2 mod 2,X>N2)->X1 is N2;X1 is X).
+
+min_num_down(N,X):-min_num_down(N,10,X1),(X1=10->fail;X is X1).
+min_num_down(0,Cur_X,Cur_X):-!.
+min_num_down(N,Cur_X,X):-N1 is N div 10,N2 is N mod 10,1 is N2 mod 2,Cur_X>N2,min_num_down(N1,N2,X),!.
+min_num_down(N,Cur_X,X):-N1 is N div 10,min_num_down(N1,Cur_X,X).
