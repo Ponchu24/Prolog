@@ -98,3 +98,25 @@ pr5_4:-Factory=[_,_,_],
     write("svar = "),write(X1),nl,
     write("sles = "),write(X2),nl,
     write("tok = "),write(X3),!.
+
+%5
+
+pr5_5:-Liquids=[_,_,_,_],
+    in_list(Liquids,[bottle,_]),
+    in_list(Liquids,[glass,_]),
+    in_list(Liquids,[jag,_]),
+    in_list(Liquids,[jur,_]),
+    in_list(Liquids,[_,milk]),
+    in_list(Liquids,[_,lemon]),
+    in_list(Liquids,[_,kvas]),
+    in_list(Liquids,[_,water]),
+    not(in_list(Liquids,[bottle,water])),
+    not(in_list(Liquids,[bottle,milk])),
+    not(in_list(Liquids,[jur,lemon])),
+    not(in_list(Liquids,[jur,water])),
+    not(in_list(Liquids,[jag,lemon])),
+    not(in_list(Liquids,[jag,kvas])),
+    not(in_list(Liquids,[glass,milk])),
+    not(in_list(Liquids,[jur,milk])),
+    write(Liquids),!.
+
