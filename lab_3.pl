@@ -102,3 +102,23 @@ kolvo_del_prost(N,_,_,N,Cur_X,Cur_X):-!.
 kolvo_del_prost(N,Sum_N,Mult_N,I,Cur_X,X):-0 is N mod I,I1 is I+1,nod(Sum_N,I,Prost),nod(Mult_N,I,Ne_prost),Prost=1,Ne_prost\=1,X1 is Cur_X+I,kolvo_del_prost(N,Sum_N,Mult_N,I1,X1,X),!.
 kolvo_del_prost(N,Sum_N,Mult_N,I,Cur_X,X):-I1 is I+1,kolvo_del_prost(N,Sum_N,Mult_N,I1,Cur_X,X).
 
+%16
+
+pt(N,X):-X is (N*(3*N-1))/2.
+is_pt(X):-is_pt(1,X).
+is_pt(N,X):-X is (N*(3*N-1))/2,!.
+is_pt(N,X):-pt(N,X1),X1<X,N1 is N+1,is_pt(N1,X),!.
+
+penta(Pj,Pk,D).
+penta(N1,N2,Cur_Pj,Cur_Pk,Cur_D,Pj,Pk,D):-pt(N1,Some_Pj),pt(N2,Some_Pk),penta(Some_Pj,Some_Pk,Some_D),Cur_D>Some_D.
+penta(Pj,Pk,D):-Diff is Pj-Pk,is_pt(Diff),Sum is Pj+Pk,is_pt(Sum),D is abs(Pk-Pj).
+
+prov(10,_):-!.
+prov(_,10):-!.
+prov(N1,N2):-N1_1 is N1+1,write(N1),write(" "),write(N2),nl,prov(N1_1,N2).
+
+prv(X):-X=0;(X>0->prvP(X,0);prvN(X,0)).
+prvP(X,Y):-Y is X,!.
+prvP(X,Y):-(Y<X->Y1 is Y+1,prvP(X,Y1);fail).
+prvN(X,Y):-Y is X,!.
+prvN(X,Y):-(Y>X->Y1 is Y-1,prvN(X,Y1);fail).
