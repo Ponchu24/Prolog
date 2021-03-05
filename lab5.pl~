@@ -120,22 +120,3 @@ pr5_5:-Liquids=[_,_,_,_],
     not(in_list(Liquids,[jur,milk])),
     write(Liquids),!.
 
-pr5:-Drinks=[_,_,_,_],
-
-    in_list(Drinks,[bottle,_]),
-    in_list(Drinks,[glass,_]),
-    in_list(Drinks,[jug,_]),
-    in_list(Drinks,[jar,_]),
-    in_list(Drinks,[_,lemonade]),
-    in_list(Drinks,[_,milk]),
-    in_list(Drinks,[_,kvass]),
-    in_list(Drinks,[_,water]),
-    not(in_list(Drinks,[bottle,water])),
-    not(in_list(Drinks,[bottle,milk])),
-    not(in_list(Drinks,[jug,lemonade])),
-    not(in_list(Drinks,[jug,kvass])),
-    not(in_list(Drinks,[jar,lemonade])),
-    not(in_list(Drinks,[jar,water])),
-    not(in_list(Drinks,[glass,milk])),
-    not(in_list(Drinks,[jar,milk])),
-    write(Drinks),!.

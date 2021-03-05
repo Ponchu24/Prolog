@@ -120,3 +120,21 @@ pr5_5:-Liquids=[_,_,_,_],
     not(in_list(Liquids,[jur,milk])),
     write(Liquids),!.
 
+%6
+
+pr5_6:-Humans=[_,_,_,_],
+    in_list(Humans,[voronov,_]),
+    in_list(Humans,[pavlov,_]),
+    in_list(Humans,[levickij,_]),
+    in_list(Humans,[saharov,_]),
+    in_list(Humans,[_,dancer]),
+    in_list(Humans,[_,artist]),
+    in_list(Humans,[_,singer]),
+    in_list(Humans,[_,writer]),
+    not(in_list(Humans,[voronov,singer])),
+    not(in_list(Humans,[levickij,singer])),
+    not(in_list(Humans,[pavlov,writer])),
+    not(in_list(Humans,[pavlov,artist])),
+    not(in_list(Humans,[saharov,writer])),
+    not(in_list(Humans,[voronov,writer])),
+    write(Humans),!.
