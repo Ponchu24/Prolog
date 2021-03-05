@@ -61,3 +61,22 @@ pr5_2:-Hair=[_,_,_],
     not(in_list(Hair,[rizhov,red])),
     not(in_list(Hair,[chernov,brunette])),
     write(Hair),!.
+
+%3
+
+pr5_3:-Dress=[_,_,_],
+
+    in_list(Dress,[ann,_,_]),
+    in_list(Dress,[valya,_,_]),
+    in_list(Dress,[natasha,_,_]),
+    in_list(Dress,[_,white,_]),
+    in_list(Dress,[_,green,_]),
+    in_list(Dress,[_,blue,_]),
+    in_list(Dress,[_,_,white]),
+    in_list(Dress,[_,_,green]),
+    in_list(Dress,[_,_,blue]),
+    in_list(Dress,[ann,X,X]),
+    not(in_list(Dress,[valya,white,_])),
+    not(in_list(Dress,[valya,_,white])),
+    in_list(Dress,[natasha,_,green]),
+    write(Dress),!.
