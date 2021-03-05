@@ -120,3 +120,54 @@ pr5_5:-Liquids=[_,_,_,_],
     not(in_list(Liquids,[jur,milk])),
     write(Liquids),!.
 
+%6
+
+pr5_6:-Humans=[_,_,_,_],
+    in_list(Humans,[voronov,_]),
+    in_list(Humans,[pavlov,_]),
+    in_list(Humans,[levickij,_]),
+    in_list(Humans,[saharov,_]),
+    in_list(Humans,[_,dancer]),
+    in_list(Humans,[_,artist]),
+    in_list(Humans,[_,singer]),
+    in_list(Humans,[_,writer]),
+    not(in_list(Humans,[voronov,singer])),
+    not(in_list(Humans,[levickij,singer])),
+    not(in_list(Humans,[pavlov,writer])),
+    not(in_list(Humans,[pavlov,artist])),
+    not(in_list(Humans,[saharov,writer])),
+    not(in_list(Humans,[voronov,writer])),
+    write(Humans),!.
+
+%7
+
+pr5_7:-Friends=[_,_,_],
+    in_list(Friends,[mikle,_,basket]),
+    in_list(Friends,[simon,izr,_]),
+    in_list(Friends,[richard,_,X1]),
+    in_list(Friends,[_,amer,_]),
+    in_list(Friends,[X2,avstr,_]),
+    in_list(Friends,[_,_,tennis]),
+    in_list(Friends,[_,_,krik]),
+    not(in_list(Friends,[mikle,amer,_])),
+    not(in_list(Friends,[_,amer,basket])),
+    not(in_list(Friends,[simon,_,tennis])),
+    not(in_list(Friends,[_,amer,krik])),
+    write("richard = "),write(X1),nl,
+    write("avstr = "),write(X2),!.
+
+pr7:-Competition=[_,_,_],
+    in_list(Competition,[simon,_,_]),
+    in_list(Competition,[richard,WHO1,_]),
+    in_list(Competition,[michael,_,_]),
+    in_list(Competition,[_,_,american]),
+    in_list(Competition,[WHO2,_,australian]),
+    in_list(Competition,[_,criket,_]),
+    in_list(Competition,[_,tennis,_]),
+    in_list(Competition,[_,basketball,_]),
+    in_list(Competition,[michael,basketball,_]),
+    not(in_list(Competition,[michael,_,american])),
+    in_list(Competition,[simon,_,israeli]),
+    not(in_list(Competition,[simon,tennis,_])),
+    write(Competition),nl,
+    write("richard - "),write(WHO1),nl,write("australian - "),write(WHO2),!.

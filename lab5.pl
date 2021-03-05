@@ -138,3 +138,21 @@ pr5_6:-Humans=[_,_,_,_],
     not(in_list(Humans,[saharov,writer])),
     not(in_list(Humans,[voronov,writer])),
     write(Humans),!.
+
+%7
+
+pr5_7:-Friends=[_,_,_],
+    in_list(Friends,[mikle,_,basket]),
+    in_list(Friends,[simon,izr,_]),
+    in_list(Friends,[richard,_,X1]),
+    in_list(Friends,[_,amer,_]),
+    in_list(Friends,[X2,avstr,_]),
+    in_list(Friends,[_,_,tennis]),
+    in_list(Friends,[_,_,krik]),
+    not(in_list(Friends,[mikle,amer,_])),
+    not(in_list(Friends,[_,amer,basket])),
+    not(in_list(Friends,[simon,_,tennis])),
+    not(in_list(Friends,[_,amer,krik])),
+    write("richard = "),write(X1),nl,
+    write("avstr = "),write(X2),!.
+
