@@ -80,21 +80,3 @@ pr5_3:-Dress=[_,_,_],
     not(in_list(Dress,[valya,_,white])),
     in_list(Dress,[natasha,_,green]),
     write(Dress),!.
-
-%4
-
-pr5_4:-Factory=[_,_,_],
-    in_list(Factory,[svar,X1,_]),
-    in_list(Factory,[sles,X2,_]),
-    in_list(Factory,[tok,X3,_]),
-    in_list(Factory,[_,borisov,_]),
-    in_list(Factory,[_,ivanov,_]),
-    in_list(Factory,[_,semenov,_]),
-    in_list(Factory,[sles,_,noone]),
-    in_list(Factory,[_,semenov,_]),
-    in_list(Factory,[_,borisov,sister]),
-    not(in_list(Factory,[sles,semenov,_])),
-    not(in_list(Factory,[tok,semenov,_])),
-    write("svar = "),write(X1),nl,
-    write("sles = "),write(X2),nl,
-    write("tok = "),write(X3),!.
