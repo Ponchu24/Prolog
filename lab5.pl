@@ -46,3 +46,18 @@ pr_ein:- Houses=[_,_,_,_,_],
         in_list(Houses,[_,WHO2,_,zebra,_]),
 	write(Houses),nl,
 	write("water - "),write(WHO1),nl,write("zebra - "),write(WHO2),!.
+
+%2
+pr5_2:-Hair=[_,_,_],
+
+    in_list(Hair,[belokurov,_]),
+    in_list(Hair,[rizhov,_]),
+    in_list(Hair,[chernov,_]),
+    in_list(Hair,[_,blond]),
+    in_list(Hair,[_,brunette]),
+    in_list(Hair,[_,red]),
+    not(in_list(Hair,[belokurov,blond])),
+    not(in_list(Hair,[belokurov,brunette])),
+    not(in_list(Hair,[rizhov,red])),
+    not(in_list(Hair,[chernov,brunette])),
+    write(Hair),!.
