@@ -38,3 +38,21 @@ numb_same_words(Word,Str,Count):-numb_same_words(Word,Str,1,Count),!.
 numb_same_words(_,[],Count,Count):-!.
 numb_same_words(Word,Str,Cur_count,Count):-skip_space_marks(Str,Str1),get_word(Str1,Word1,Str2),(Word=Word1->Cur_count1 is Cur_count+1,numb_same_words(Word,Str2,Cur_count1,Count);numb_same_words(Word,Str2,Cur_count,Count)).
 
+%4
+
+swap_list([H|T],Res_list):-swap_list([H|T],[],Res_list).
+swap_list([],Cur_list,Cur_list):-!.
+swap_list([H|T],Cur_list,Res_list):-swap_list(T,[H|Cur_list],Res_list).
+
+pr4:-read_str(Str,Lenght),(Lenght>5->pr4_more5(Str,Res),write_str(Res);pr4_less5(Str,Lenght)).
+
+pr4_more5(Str,Res):-get_3fist(Str,First3),swap_list(Str,Str1),get_3fist(Str1,Swapped_last3),swap_list(Swapped_last3,Last3),append(First3,Last3,Res).
+
+pr4_less5(_,0):-!.
+pr4_less5([H|_],I):-write_str([H]),I1 is I-1,pr4_less5([H],I1).
+
+get_3fist(Str,Res):-get_3fist(Str,3,[],Res).
+get_3fist(_,0,Res,Res):-!.
+get_3fist([H|T],I,Cur_res,Res):-append(Cur_res,[H],Cur_res1),I1 is I-1,get_3fist(T,I1,Cur_res1,Res).
+
+
