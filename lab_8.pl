@@ -49,3 +49,27 @@ count_A(Str,Res):-count_A(Str,0,Res).
 count_A([],Res,Res):-!.
 count_A([H|T],Cur_res,Res):-H=65,Cur_res1 is Cur_res+1,count_A(T,Cur_res1,Res),!.
 count_A([_|T],Cur_res,Res):-count_A(T,Cur_res,Res).
+
+%1.4. Дан файл, вывести самое частое слово.
+
+pr1_4:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr),seen,add_space(ListStr,ListStr1),append(ListStr1,Str),pr3(Str,0,[],Res),write_str(Res).
+
+add_space(ListStr,Res):-add_space(ListStr,[],Res).
+add_space([],Res,Res):-!.
+add_space([H|T],Cur_res,Res):-append(H,[32],H1),append(Cur_res,[H1],Cur_res1),add_space(T,Cur_res1,Res).
+
+pr3([],_,Res,Res):-!.
+pr3(Str,Cur_count,Cur_word,Res):-skip_space_marks(Str,Str1),get_word(Str1,Word,Str2),numb_same_words(Word,Str1,Count),(Count>Cur_count->pr3(Str2,Count,Word,Res);pr3(Str2,Cur_count,Cur_word,Res)).
+
+skip_space_marks([H|T],Str1):-(H=32;H=40;H=41;H=43;H=44;H=46;H=47),skip_space_marks(T,Str1),!.
+skip_space_marks(Str1,Str1).
+
+get_word([],[],[]):-!.
+get_word(Str,Word,Str2):-get_word(Str,[],Word,Str2).
+get_word([],Word,Word,[]).
+get_word([H|T],Word,Word,T):-(H=32;H=40;H=41;H=43;H=44;H=46;H=47),!.
+get_word([H|T],Word,Word1,Str2):-append(Word,[H],Word2),get_word(T,Word2,Word1,Str2).
+
+numb_same_words(Word,Str,Count):-numb_same_words(Word,Str,1,Count),!.
+numb_same_words(_,[],Count,Count):-!.
+numb_same_words(Word,Str,Cur_count,Count):-skip_space_marks(Str,Str1),get_word(Str1,Word1,Str2),(Word=Word1->Cur_count1 is Cur_count+1,numb_same_words(Word,Str2,Cur_count1,Count);numb_same_words(Word,Str2,Cur_count,Count)).
