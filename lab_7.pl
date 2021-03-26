@@ -231,3 +231,14 @@ pr19([97|T],Cur_res,Res):-pr19_ba(T),Cur_res1 is Cur_res+1,pr19(T,Cur_res1,Res),
 pr19([_|T],Cur_res,Res):-pr19(T,Cur_res,Res).
 
 pr19_ba([98|[97|_]]):-!.
+
+% 20. Удалить в строке все лишние пробелы, то есть серии подряд идущих
+% пробелов заменить на одиночные пробелы. Крайние пробелы в строке
+% удалить.
+
+pr20:-read_str(Str,_),skip_space(Str,Str1),swap_list(Str1,Str2),skip_space(Str2,Str3),swap_list(Str3,Str4),pr20(Str4,Res),write_str(Res).
+
+pr20(Str,Res):-pr20(Str,[],Res).
+pr20([],Res,Res):-!.
+pr20([32|T],Cur_res,Res):-skip_space(T,T1),append(Cur_res,[32],Cur_res1),pr20(T1,Cur_res1,Res),!.
+pr20([H|T],Cur_res,Res):-append(Cur_res,[H],Cur_res1),pr20(T,Cur_res1,Res),!.
