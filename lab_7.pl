@@ -170,3 +170,12 @@ change_second(Str,Rand,Res):-change_second(Str,Rand,1,[],Res).
 change_second([_|T],Rand,2,Cur_res,Res):-append(Cur_res,[Rand],Cur_res1),append(Cur_res1,T,Res),!.
 change_second([H|T],Rand,I,Cur_res,Res):-append(Cur_res,[H],Cur_res1),I1 is I+1,change_second(T,Rand,I1,Cur_res1,Res).
 
+%13. Дана строка. Заменить каждый четный символ или на 'a', если символ
+% не равен 'a' или 'b', или на 'c' в противном случае.
+
+pr13:-read_str(Str,_),pr13(Str,Res),write_str(Res).
+pr13(Str,Res):-pr13(Str,1,[],Res).
+pr13([],_,Res,Res):-!.
+pr13([H|T],1,Cur_res,Res):-append(Cur_res,[H],Cur_res1),pr13(T,2,Cur_res1,Res),!.
+pr13([H|T],2,Cur_res,Res):-(H=97;H=98),append(Cur_res,[99],Cur_res1),pr13(T,1,Cur_res1,Res),!.
+pr13([_|T],2,Cur_res,Res):-append(Cur_res,[97],Cur_res1),pr13(T,1,Cur_res1,Res).
