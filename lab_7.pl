@@ -188,3 +188,10 @@ count_of_num(Str,Res):-count_of_num(Str,0,Res).
 count_of_num([],Res,Res):-!.
 count_of_num([H|T],Cur_res,Res):-H>=48,H=<57,Cur_res1 is Cur_res+1,count_of_num(T,Cur_res1,Res),!.
 count_of_num([_|T],Cur_res,Res):-count_of_num(T,Cur_res,Res).
+
+% 15. Дана строка. Определить, содержит ли строка только символы 'a',
+% 'b', 'c' или нет.
+
+pr15:-read_str(Str,_),only_abc(Str).
+only_abc([]):-!.
+only_abc([H|T]):-(H=97;H=98;H=99),only_abc(T),!.
