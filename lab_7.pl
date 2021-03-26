@@ -9,10 +9,10 @@ read_str(A,N):-get0(X),r_str(X,A,[],N,0).
 r_str(10,A,A,N,N):-!.
 r_str(X,A,B,N,K):-K1 is K+1,append(B,[X],B1),get0(X1),r_str(X1,A,B1,N,K1).
 
-%1. Äàíà ñòðîêà. Âûâåñòè åå òðè ðàçà ÷åðåç çàïÿòóþ è ïîêàçàòü êîëè÷åñòâî ñèìâîëîâ â íåé.
+%1. Ð”Ð°Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ°. Ð’Ñ‹Ð²ÐµÑÑ‚Ð¸ ÐµÐµ Ñ‚Ñ€Ð¸ Ñ€Ð°Ð·Ð° Ñ‡ÐµÑ€ÐµÐ· Ð·Ð°Ð¿ÑÑ‚ÑƒÑŽ Ð¸ Ð¿Ð¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð² Ð² Ð½ÐµÐ¹.
 pr1:-read_str(List,Length),write_str(List),write(", "),write_str(List),write(", "),write_str(List),nl,write("Lenght = "),write(Length).
 
-%2. Äàíà ñòðîêà. Íàéòè êîëè÷åñòâî ñëîâ.
+%2. Ð”Ð°Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ°. ÐÐ°Ð¹Ñ‚Ð¸ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ»Ð¾Ð².
 pr2:-read_str(List,_),count_words(List,0,K),write(K),!.
 count_words([],K,K):-!.
 count_words(Str,I,K):-skip_space_marks(Str,Str1),get_word(Str1,Word,Str2),Word\=[],I1 is I+1,count_words(Str2,I1,K),!.
@@ -30,7 +30,7 @@ get_word([],Word,Word,[]).
 get_word([H|T],Word,Word,T):-(H=32;H=40;H=41;H=43;H=44;H=46;H=47),!.
 get_word([H|T],Word,Word1,Str2):-append(Word,[H],Word2),get_word(T,Word2,Word1,Str2).
 
-%3. Äàíà ñòðîêà, îïðåäåëèòü ñàìîå ÷àñòîå ñëîâî.
+%3. Ð”Ð°Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ°, Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»Ð¸Ñ‚ÑŒ ÑÐ°Ð¼Ð¾Ðµ Ñ‡Ð°ÑÑ‚Ð¾Ðµ ÑÐ»Ð¾Ð²Ð¾.
 
 pr3:-read_str(Str,_),pr3(Str,0,[],Res),write_str(Res).
 pr3([],_,Res,Res):-!.
@@ -39,9 +39,9 @@ numb_same_words(Word,Str,Count):-numb_same_words(Word,Str,1,Count),!.
 numb_same_words(_,[],Count,Count):-!.
 numb_same_words(Word,Str,Cur_count,Count):-skip_space_marks(Str,Str1),get_word(Str1,Word1,Str2),(Word=Word1->Cur_count1 is Cur_count+1,numb_same_words(Word,Str2,Cur_count1,Count);numb_same_words(Word,Str2,Cur_count,Count)).
 
-%4. Äàíà ñòðîêà. Âûâåñòè ïåðâûå òðè ñèìâîëà è ïîñëåäíèé òðè ñèìâîëà,
-% åñëè äëèíà ñòðîêè áîëüøå 5 Èíà÷å âûâåñòè ïåðâûé ñèìâîë ñòîëüêî
-% ðàç, êàêîâà äëèíà ñòðîêè.
+%4. Ð”Ð°Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ°. Ð’Ñ‹Ð²ÐµÑÑ‚Ð¸ Ð¿ÐµÑ€Ð²Ñ‹Ðµ Ñ‚Ñ€Ð¸ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð° Ð¸ Ð¿Ð¾ÑÐ»ÐµÐ´Ð½Ð¸Ð¹ Ñ‚Ñ€Ð¸ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð°,
+% ÐµÑÐ»Ð¸ Ð´Ð»Ð¸Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ¸ Ð±Ð¾Ð»ÑŒÑˆÐµ 5 Ð˜Ð½Ð°Ñ‡Ðµ Ð²Ñ‹Ð²ÐµÑÑ‚Ð¸ Ð¿ÐµÑ€Ð²Ñ‹Ð¹ ÑÐ¸Ð¼Ð²Ð¾Ð» ÑÑ‚Ð¾Ð»ÑŒÐºÐ¾
+% Ñ€Ð°Ð·, ÐºÐ°ÐºÐ¾Ð²Ð° Ð´Ð»Ð¸Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ¸.
 
 swap_list([H|T],Res_list):-swap_list([H|T],[],Res_list).
 swap_list([],Cur_list,Cur_list):-!.
@@ -58,8 +58,8 @@ get_3fist(Str,Res):-get_3fist(Str,3,[],Res).
 get_3fist(_,0,Res,Res):-!.
 get_3fist([H|T],I,Cur_res,Res):-append(Cur_res,[H],Cur_res1),I1 is I-1,get_3fist(T,I1,Cur_res1,Res).
 
-%5. Äàíà ñòðîêà. Ïîêàçàòü íîìåðà ñèìâîëîâ, ñîâïàäàþùèõ ñ ïîñëåäíèì
-% ñèìâîëîì ñòðîêè.
+%5. Ð”Ð°Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ°. ÐŸÐ¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ Ð½Ð¾Ð¼ÐµÑ€Ð° ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð², ÑÐ¾Ð²Ð¿Ð°Ð´Ð°ÑŽÑ‰Ð¸Ñ… Ñ Ð¿Ð¾ÑÐ»ÐµÐ´Ð½Ð¸Ð¼
+% ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð¼ ÑÑ‚Ñ€Ð¾ÐºÐ¸.
 
 pr5:-read_str(Str,_),get_last(Str,Last),pr5(Str,Last,1,[],Res),write(Res).
 pr5([],_,_,Res,Res):-!.
@@ -68,15 +68,15 @@ pr5([_|T],Last,I,Cur_res,Res):-I1 is I+1,pr5(T,Last,I1,Cur_res,Res).
 
 get_last(Str,Res):-swap_list(Str,[H|_]),Res is H.
 
-%6. Äàíà ñòðîêà. Ïîêàçàòü òðåòèé, øåñòîé, äåâÿòûé è òàê äàëåå ñèìâîëû.
+%6. Ð”Ð°Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ°. ÐŸÐ¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ Ñ‚Ñ€ÐµÑ‚Ð¸Ð¹, ÑˆÐµÑÑ‚Ð¾Ð¹, Ð´ÐµÐ²ÑÑ‚Ñ‹Ð¹ Ð¸ Ñ‚Ð°Ðº Ð´Ð°Ð»ÐµÐµ ÑÐ¸Ð¼Ð²Ð¾Ð»Ñ‹.
 
 pr6:-read_str(Str,_),pr6(Str,1,[],Res),write_str(Res).
 pr6([],_,Res,Res):-!.
 pr6([H|T],I,Cur_res,Res):-0 is I mod 3,append(Cur_res,[H],Cur_res1),I1 is I+1,pr6(T,I1,Cur_res1,Res),!.
 pr6([_|T],I,Cur_res,Res):-I1 is I+1,pr6(T,I1,Cur_res,Res).
 
-%7. Äàíà ñòðîêà. Îïðåäåëèòå îáùåå êîëè÷åñòâî ñèìâîëîâ '+' è '-' â íåé. À
-% òàê æå ñêîëüêî òàêèõ ñèìâîëîâ, ïîñëå êîòîðûõ ñëåäóåò öèôðà íîëü.
+%7. Ð”Ð°Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ°. ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»Ð¸Ñ‚Ðµ Ð¾Ð±Ñ‰ÐµÐµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð² '+' Ð¸ '-' Ð² Ð½ÐµÐ¹. Ð
+% Ñ‚Ð°Ðº Ð¶Ðµ ÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ñ‚Ð°ÐºÐ¸Ñ… ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð², Ð¿Ð¾ÑÐ»Ðµ ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ñ… ÑÐ»ÐµÐ´ÑƒÐµÑ‚ Ñ†Ð¸Ñ„Ñ€Ð° Ð½Ð¾Ð»ÑŒ.
 
 pr7:-read_str(Str,_),count_plus_minus(Str,Res1),count_before_zero(Str,Res2),write("Count of pluses and minuses: "),write(Res1),nl,write("Count of symbols followed by zero: "),write(Res2).
 
@@ -90,9 +90,9 @@ count_before_zero([],Res,Res):-!.
 count_before_zero([_|[48|T]],Cur_res,Res):-Cur_res1 is Cur_res+1,count_before_zero([48|T],Cur_res1,Res),!.
 count_before_zero([_|T],Cur_res,Res):-count_before_zero(T,Cur_res,Res).
 
-%8. Äàíà ñòðîêà. Îïðåäåëèòå, êàêîé ñèìâîë â íåé âñòðå÷àåòñÿ ðàíüøå:
-% 'x'(120) èëè 'w'(119). Åñëè êàêîãî-òî èç ñèìâîëîâ íåò, âûâåñòè
-% ñîîáùåíèå îá ýòîì.
+%8. Ð”Ð°Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ°. ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»Ð¸Ñ‚Ðµ, ÐºÐ°ÐºÐ¾Ð¹ ÑÐ¸Ð¼Ð²Ð¾Ð» Ð² Ð½ÐµÐ¹ Ð²ÑÑ‚Ñ€ÐµÑ‡Ð°ÐµÑ‚ÑÑ Ñ€Ð°Ð½ÑŒÑˆÐµ:
+% 'x'(120) Ð¸Ð»Ð¸ 'w'(119). Ð•ÑÐ»Ð¸ ÐºÐ°ÐºÐ¾Ð³Ð¾-Ñ‚Ð¾ Ð¸Ð· ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð² Ð½ÐµÑ‚, Ð²Ñ‹Ð²ÐµÑÑ‚Ð¸
+% ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ Ð¾Ð± ÑÑ‚Ð¾Ð¼.
 
 list_el_numb(List,El,Num):-list_el_numb(List,El,0,Num).
 list_el_numb([H|_],H,Num,Num):-!.
@@ -105,8 +105,8 @@ find_x(_,_):-write("\"x\" not found"),fail.
 find_w(Str,Num):-list_el_numb(Str,119,Num),!.
 find_w(_,_):-write("\"w\" not found"),fail.
 
-%9. Äàíû äâå ñòðîêè. Âûâåñòè áîëüøóþ ïî äëèíå ñòðîêó ñòîëüêî ðàç, íà
-% ñêîëüêî ñèìâîëîâ îòëè÷àþòñÿ ñòðîêè.
+%9. Ð”Ð°Ð½Ñ‹ Ð´Ð²Ðµ ÑÑ‚Ñ€Ð¾ÐºÐ¸. Ð’Ñ‹Ð²ÐµÑÑ‚Ð¸ Ð±Ð¾Ð»ÑŒÑˆÑƒÑŽ Ð¿Ð¾ Ð´Ð»Ð¸Ð½Ðµ ÑÑ‚Ñ€Ð¾ÐºÑƒ ÑÑ‚Ð¾Ð»ÑŒÐºÐ¾ Ñ€Ð°Ð·, Ð½Ð°
+% ÑÐºÐ¾Ð»ÑŒÐºÐ¾ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð² Ð¾Ñ‚Ð»Ð¸Ñ‡Ð°ÑŽÑ‚ÑÑ ÑÑ‚Ñ€Ð¾ÐºÐ¸.
 
 pr9:-read_str(Str1,Lenght1),read_str(Str2,Lenght2),(Lenght1>Lenght2 -> Diff is Lenght1-Lenght2, write_I_times(Str1,Diff);Diff is Lenght2-Lenght1, write_I_times(Str2,Diff)).
 
