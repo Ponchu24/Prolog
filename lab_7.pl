@@ -220,3 +220,14 @@ pr18:-read_str(Str,_),pr18(Str,Res),write_str(Res).
 pr18([],[]):-!.
 pr18([97|[98|[99|[H|T]]]],[H|T1]):-H>=48,H=<57,pr18(T,T1),!.
 pr18([H|T],[H|T1]):-pr18(T,T1).
+
+%19. Найдите количество вхождения 'aba' в строку.
+
+pr19:-read_str(Str,_),pr19(Str,Res),write(Res).
+
+pr19(Str,Res):-pr19(Str,0,Res).
+pr19([],Res,Res):-!.
+pr19([97|T],Cur_res,Res):-pr19_ba(T),Cur_res1 is Cur_res+1,pr19(T,Cur_res1,Res),!.
+pr19([_|T],Cur_res,Res):-pr19(T,Cur_res,Res).
+
+pr19_ba([98|[97|_]]):-!.
