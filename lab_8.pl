@@ -92,3 +92,13 @@ pr1_5_repeat_check(Str,All_str):-skip_space_marks(Str,Str1),get_word(Str1,Word,S
 % порядке.
 
 pr2_5:-read_str(Str,_,_),random_permutation(Str,Str1),write_str(Str1).
+
+%2.7. Дана строка, состоящая из символов латиницы. Необходимо проверить,
+% образуют ли прописные символы этой строки палиндром.
+
+pr2_7:-read_str(Str,_,_),get_prop(Str,Str1),reverse(Str1,Rev_Str1),Str1=Rev_Str1.
+
+get_prop(Str,Res):-get_prop(Str,[],Res).
+get_prop([],Res,Res):-!.
+get_prop([H|T],Cur_res,Res):-H>=65,H=<90,append(Cur_res,[H],Cur_res1),get_prop(T,Cur_res1,Res),!.
+get_prop([_|T],Cur_res,Res):-get_prop(T,Cur_res,Res).
