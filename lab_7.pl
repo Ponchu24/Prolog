@@ -55,4 +55,11 @@ get_3fist(Str,Res):-get_3fist(Str,3,[],Res).
 get_3fist(_,0,Res,Res):-!.
 get_3fist([H|T],I,Cur_res,Res):-append(Cur_res,[H],Cur_res1),I1 is I-1,get_3fist(T,I1,Cur_res1,Res).
 
+%5
 
+pr5:-read_str(Str,_),get_last(Str,Last),pr5(Str,Last,1,[],Res),write(Res).
+pr5([],_,_,Res,Res):-!.
+pr5([H|T],Last,I,Cur_res,Res):-H=Last,append(Cur_res,[I],Cur_res1),I1 is I+1,pr5(T,Last,I1,Cur_res1,Res),!.
+pr5([_|T],Last,I,Cur_res,Res):-I1 is I+1,pr5(T,Last,I1,Cur_res,Res).
+
+get_last(Str,Res):-swap_list(Str,[H|_]),Res is H.
