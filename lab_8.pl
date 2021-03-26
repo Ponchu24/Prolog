@@ -52,24 +52,38 @@ count_A([_|T],Cur_res,Res):-count_A(T,Cur_res,Res).
 
 %1.4. Дан файл, вывести самое частое слово.
 
-pr1_4:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr),seen,add_space(ListStr,ListStr1),append(ListStr1,Str),pr3(Str,0,[],Res),write_str(Res).
+pr1_4:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr),seen,add_enter(ListStr,ListStr1),append(ListStr1,Str),pr3(Str,0,[],Res),write_str(Res).
 
-add_space(ListStr,Res):-add_space(ListStr,[],Res).
-add_space([],Res,Res):-!.
-add_space([H|T],Cur_res,Res):-append(H,[32],H1),append(Cur_res,[H1],Cur_res1),add_space(T,Cur_res1,Res).
+add_enter(ListStr,Res):-add_enter(ListStr,[],Res).
+add_enter([],Res,Res):-!.
+add_enter([H|T],Cur_res,Res):-append(H,[10],H1),append(Cur_res,[H1],Cur_res1),add_enter(T,Cur_res1,Res).
 
 pr3([],_,Res,Res):-!.
 pr3(Str,Cur_count,Cur_word,Res):-skip_space_marks(Str,Str1),get_word(Str1,Word,Str2),numb_same_words(Word,Str1,Count),(Count>Cur_count->pr3(Str2,Count,Word,Res);pr3(Str2,Cur_count,Cur_word,Res)).
 
-skip_space_marks([H|T],Str1):-(H=32;H=40;H=41;H=43;H=44;H=46;H=47),skip_space_marks(T,Str1),!.
+skip_space_marks([H|T],Str1):-(H=32;H=40;H=41;H=43;H=44;H=46;H=47;H=10),skip_space_marks(T,Str1),!.
 skip_space_marks(Str1,Str1).
 
 get_word([],[],[]):-!.
 get_word(Str,Word,Str2):-get_word(Str,[],Word,Str2).
 get_word([],Word,Word,[]).
-get_word([H|T],Word,Word,T):-(H=32;H=40;H=41;H=43;H=44;H=46;H=47),!.
+get_word([H|T],Word,Word,T):-(H=32;H=40;H=41;H=43;H=44;H=46;H=47;H=10),!.
 get_word([H|T],Word,Word1,Str2):-append(Word,[H],Word2),get_word(T,Word2,Word1,Str2).
 
 numb_same_words(Word,Str,Count):-numb_same_words(Word,Str,1,Count),!.
 numb_same_words(_,[],Count,Count):-!.
 numb_same_words(Word,Str,Cur_count,Count):-skip_space_marks(Str,Str1),get_word(Str1,Word1,Str2),(Word=Word1->Cur_count1 is Cur_count+1,numb_same_words(Word,Str2,Cur_count1,Count);numb_same_words(Word,Str2,Cur_count,Count)).
+
+%1.5. Дан файл, вывести в отдельный файл строки, состоящие из слов, не
+% повторяющихся в исходном файле.
+
+pr1_5:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr),seen,add_enter(ListStr,ListStr1),append(ListStr1,Str),tell('C:/Users/HP/Documents/Prolog/lab_8#1_5.txt'),pr1_5_write(ListStr,Str),told.
+
+check:-read_str(Str,_,_),write(Str).
+
+pr1_5_write([],_):-!.
+pr1_5_write([H|T],All_str):-pr1_5_repeat_check(H,All_str),write_str(H),nl,pr1_5_write(T,All_str),!.
+pr1_5_write([_|T],All_str):-pr1_5_write(T,All_str).
+
+pr1_5_repeat_check([],_):-!.
+pr1_5_repeat_check(Str,All_str):-skip_space_marks(Str,Str1),get_word(Str1,Word,Str2),numb_same_words(Word,All_str,Count),Count=2,pr1_5_repeat_check(Str2,All_str).
