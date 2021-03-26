@@ -49,14 +49,14 @@ swap_list([H|T],Cur_list,Res_list):-swap_list(T,[H|Cur_list],Res_list).
 
 pr4:-read_str(Str,Lenght),(Lenght>5->pr4_more5(Str,Res),write_str(Res);pr4_less5(Str,Lenght)).
 
-pr4_more5(Str,Res):-get_3fist(Str,First3),swap_list(Str,Str1),get_3fist(Str1,Swapped_last3),swap_list(Swapped_last3,Last3),append(First3,Last3,Res).
+pr4_more5(Str,Res):-get_3first(Str,First3),swap_list(Str,Str1),get_3first(Str1,Swapped_last3),swap_list(Swapped_last3,Last3),append(First3,Last3,Res).
 
 pr4_less5(_,0):-!.
 pr4_less5([H|_],I):-write_str([H]),I1 is I-1,pr4_less5([H],I1).
 
-get_3fist(Str,Res):-get_3fist(Str,3,[],Res).
-get_3fist(_,0,Res,Res):-!.
-get_3fist([H|T],I,Cur_res,Res):-append(Cur_res,[H],Cur_res1),I1 is I-1,get_3fist(T,I1,Cur_res1,Res).
+get_3first(Str,Res):-get_3first(Str,3,[],Res).
+get_3first(_,0,Res,Res):-!.
+get_3first([H|T],I,Cur_res,Res):-append(Cur_res,[H],Cur_res1),I1 is I-1,get_3first(T,I1,Cur_res1,Res).
 
 %5. Дана строка. Показать номера символов, совпадающих с последним
 % символом строки.
@@ -126,3 +126,20 @@ pr10_abc([97|[98|[99|_]]]).
 %pr10_a([97|T]):-pr10_b(T).
 %pr10_b([98|T]):-pr10_c(T).
 %pr10_c([99|_]).
+
+%11. Дана строка. Если ее длина больше 10, то оставить в строке только
+% первые 6 символов, иначе дополнить строку символами 'o' до длины 12.
+
+pr11:-read_str(Str,Lenght),(Lenght>10 -> get_6first(Str,Res);pr11_less_10(Str,Res)),write_str(Res).
+
+lenght([_|T],Res):-lenght([_|T],0,Res).
+lenght([],I,I):-!.
+lenght([_|T],I,Res):-I1 is I+1,lenght(T,I1,Res).
+
+get_6first(Str,Res):-get_6first(Str,6,[],Res).
+get_6first(_,0,Res,Res):-!.
+get_6first([H|T],I,Cur_res,Res):-append(Cur_res,[H],Cur_res1),I1 is I-1,get_6first(T,I1,Cur_res1,Res).
+
+pr11_less_10(Str,Res):-add_o(Str,Str1),lenght(Str1,Lenght),(Lenght<12->pr11_less_10(Str1,Res);Res = Str1).
+add_o(Str,Res):-append([111],Str,Res).
+
