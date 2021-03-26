@@ -63,3 +63,10 @@ pr5([H|T],Last,I,Cur_res,Res):-H=Last,append(Cur_res,[I],Cur_res1),I1 is I+1,pr5
 pr5([_|T],Last,I,Cur_res,Res):-I1 is I+1,pr5(T,Last,I1,Cur_res,Res).
 
 get_last(Str,Res):-swap_list(Str,[H|_]),Res is H.
+
+%6
+
+pr6:-read_str(Str,_),pr6(Str,1,[],Res),write_str(Res).
+pr6([],_,Res,Res):-!.
+pr6([H|T],I,Cur_res,Res):-0 is I mod 3,append(Cur_res,[H],Cur_res1),I1 is I+1,pr6(T,I1,Cur_res1,Res),!.
+pr6([_|T],I,Cur_res,Res):-I1 is I+1,pr6(T,I1,Cur_res,Res).
