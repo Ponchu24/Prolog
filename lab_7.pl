@@ -232,7 +232,7 @@ pr19([_|T],Cur_res,Res):-pr19(T,Cur_res,Res).
 
 pr19_ba([98|[97|_]]):-!.
 
-% 20. Удалить в строке все лишние пробелы, то есть серии подряд идущих
+%20. Удалить в строке все лишние пробелы, то есть серии подряд идущих
 % пробелов заменить на одиночные пробелы. Крайние пробелы в строке
 % удалить.
 
@@ -242,3 +242,20 @@ pr20(Str,Res):-pr20(Str,[],Res).
 pr20([],Res,Res):-!.
 pr20([32|T],Cur_res,Res):-skip_space(T,T1),append(Cur_res,[32],Cur_res1),pr20(T1,Cur_res1,Res),!.
 pr20([H|T],Cur_res,Res):-append(Cur_res,[H],Cur_res1),pr20(T,Cur_res1,Res),!.
+
+%21. Дана строка, состоящая из слов, разделенных символами, которые перечислены
+% во второй строке. Показать все слова.
+
+pr21:-read_str(Str,_),read_str(Symb,_),skip_symbs(Str,Symb,Str1),write_words(Str1,Symb).
+
+write_words([],_):-!.
+write_words(Str,Symb):-get_word21(Str,Symb,Word,Str1),write_str(Word),nl,skip_symbs(Str1,Symb,Str2),write_words(Str2,Symb).
+
+get_word21([],[],[]):-!.
+get_word21(Str,Symb,Word,Str2):-get_word21(Str,Symb,[],Word,Str2).
+get_word21([],_,Word,Word,[]):-!.
+get_word21([H|T],Symb,Word,Word,T):-member(H,Symb),!.
+get_word21([H|T],Symb,Word,Word1,Str2):-append(Word,[H],Word2),get_word21(T,Symb,Word2,Word1,Str2).
+
+skip_symbs([H|T],Symb,Str1):-member(H,Symb),skip_symbs(T,Symb,Str1),!.
+skip_symbs(Str1,_,Str1).
