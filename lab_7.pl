@@ -104,3 +104,12 @@ find_x(Str,Num):-list_el_numb(Str,120,Num),!.
 find_x(_,_):-write("\"x\" not found"),fail.
 find_w(Str,Num):-list_el_numb(Str,119,Num),!.
 find_w(_,_):-write("\"w\" not found"),fail.
+
+%9. Даны две строки. Вывести большую по длине строку столько раз, на
+% сколько символов отличаются строки.
+
+pr9:-read_str(Str1,Lenght1),read_str(Str2,Lenght2),(Lenght1>Lenght2 -> Diff is Lenght1-Lenght2, write_I_times(Str1,Diff);Diff is Lenght2-Lenght1, write_I_times(Str2,Diff)).
+
+write_I_times(_,0):-!.
+write_I_times(Str,I):-write_str(Str),nl,I1 is I-1,write_I_times(Str,I1).
+
