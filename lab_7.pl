@@ -199,7 +199,16 @@ only_abc([H|T]):-(H=97;H=98;H=99),only_abc(T),!.
 %16. Замените в строке все вхождения 'word' на 'letter'.
 
 pr16:-read_str(Str,_),pr16(Str,Res),write_str(Res).
+
 pr16(Str,Res):-pr16(Str,[],Res).
 pr16([],Res,Res):-!.
 pr16([119|[111|[114|[100|T]]]],Cur_res,Res):-append(Cur_res,[108,101,116,116,101,114],Cur_res1),pr16(T,Cur_res1,Res),!.
 pr16([H|T],Cur_res,Res):-append(Cur_res,[H],Cur_res1),pr16(T,Cur_res1,Res).
+
+%17. Удалите в строке все буквы 'x'. за которыми следует 'abc'.
+
+pr17:-read_str(Str,_),pr17(Str,Res),write_str(Res).
+
+pr17([],[]):-!.
+pr17([120|T],T1):-pr10_abc(T),pr17(T,T1),!.
+pr17([H|T],[H|T1]):-pr17(T,T1).
