@@ -70,3 +70,18 @@ pr6:-read_str(Str,_),pr6(Str,1,[],Res),write_str(Res).
 pr6([],_,Res,Res):-!.
 pr6([H|T],I,Cur_res,Res):-0 is I mod 3,append(Cur_res,[H],Cur_res1),I1 is I+1,pr6(T,I1,Cur_res1,Res),!.
 pr6([_|T],I,Cur_res,Res):-I1 is I+1,pr6(T,I1,Cur_res,Res).
+
+%7
+
+pr7:-read_str(Str,_),count_plus_minus(Str,Res1),count_before_zero(Str,Res2),write("Count of pluses and minuses: "),write(Res1),nl,write("Count of symbols followed by zero: "),write(Res2).
+
+count_plus_minus(Str,Res):-count_plus_minus(Str,0,Res).
+count_plus_minus([],Res,Res):-!.
+count_plus_minus([H|T],Cur_res,Res):-(H=43;H=45),Cur_res1 is Cur_res+1,count_plus_minus(T,Cur_res1,Res),!.
+count_plus_minus([_|T],Cur_res,Res):-count_plus_minus(T,Cur_res,Res).
+
+count_before_zero(Str,Res):-count_before_zero(Str,0,Res).
+count_before_zero([],Res,Res):-!.
+count_before_zero([_|[48|T]],Cur_res,Res):-Cur_res1 is Cur_res+1,count_before_zero([48|T],Cur_res1,Res),!.
+count_before_zero([_|T],Cur_res,Res):-count_before_zero(T,Cur_res,Res).
+
