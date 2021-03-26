@@ -179,3 +179,12 @@ pr13([],_,Res,Res):-!.
 pr13([H|T],1,Cur_res,Res):-append(Cur_res,[H],Cur_res1),pr13(T,2,Cur_res1,Res),!.
 pr13([H|T],2,Cur_res,Res):-(H=97;H=98),append(Cur_res,[99],Cur_res1),pr13(T,1,Cur_res1,Res),!.
 pr13([_|T],2,Cur_res,Res):-append(Cur_res,[97],Cur_res1),pr13(T,1,Cur_res1,Res).
+
+%14. В данной строке найти количество цифр.
+
+pr14:-read_str(Str,_),count_of_num(Str,Res),write(Res).
+
+count_of_num(Str,Res):-count_of_num(Str,0,Res).
+count_of_num([],Res,Res):-!.
+count_of_num([H|T],Cur_res,Res):-H>=48,H=<57,Cur_res1 is Cur_res+1,count_of_num(T,Cur_res1,Res),!.
+count_of_num([_|T],Cur_res,Res):-count_of_num(T,Cur_res,Res).
