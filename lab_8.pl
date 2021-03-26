@@ -31,3 +31,21 @@ pr1_2(ListStr,Res):-pr1_2(ListStr,0,Res).
 pr1_2([],Res,Res):-!.
 pr1_2([H|T],Cur_res,Res):-not(member(32,H)),Cur_res1 is Cur_res+1,pr1_2(T,Cur_res1,Res),!.
 pr1_2([_|T],Cur_res,Res):-pr1_2(T,Cur_res,Res).
+
+%1.3. Дан файл, найти и вывести на экран только те строки, в которых букв
+% А больше, чем в среднем на строку.
+
+pr1_3:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr,_),seen,count_A_list(ListStr,Count_A_list),sum_list(Count_A_list,Sum),length(ListStr,Lenght),Sr is Sum/Lenght,pr1_3_write(ListStr,Count_A_list,Sr).
+
+pr1_3_write([],[],_):-!.
+pr1_3_write([H|T],[HA|TA],Sr):-HA>Sr,write_str(H),nl,pr1_3_write(T,TA,Sr),!.
+pr1_3_write([_|T],[_|TA],Sr):-pr1_3_write(T,TA,Sr).
+
+count_A_list(ListStr,Res):-count_A_list(ListStr,[],Res).
+count_A_list([],Res,Res):-!.
+count_A_list([H|T],Cur_res,Res):-count_A(H,Count_A),append(Cur_res,[Count_A],Cur_res1),count_A_list(T,Cur_res1,Res).
+
+count_A(Str,Res):-count_A(Str,0,Res).
+count_A([],Res,Res):-!.
+count_A([H|T],Cur_res,Res):-H=65,Cur_res1 is Cur_res+1,count_A(T,Cur_res1,Res),!.
+count_A([_|T],Cur_res,Res):-count_A(T,Cur_res,Res).
