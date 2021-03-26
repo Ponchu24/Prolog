@@ -113,3 +113,4 @@ pr9:-read_str(Str1,Lenght1),read_str(Str2,Lenght2),(Lenght1>Lenght2 -> Diff is L
 write_I_times(_,0):-!.
 write_I_times(Str,I):-write_str(Str),nl,I1 is I-1,write_I_times(Str,I1).
 
+%10.
