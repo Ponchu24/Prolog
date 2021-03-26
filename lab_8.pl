@@ -87,3 +87,8 @@ pr1_5_write([_|T],All_str):-pr1_5_write(T,All_str).
 
 pr1_5_repeat_check([],_):-!.
 pr1_5_repeat_check(Str,All_str):-skip_space_marks(Str,Str1),get_word(Str1,Word,Str2),numb_same_words(Word,All_str,Count),Count=2,pr1_5_repeat_check(Str2,All_str).
+
+%2.5. Дана строка. Необходимо перемешать все символы строки в случайном
+% порядке.
+
+pr2_5:-read_str(Str,_,_),random_permutation(Str,Str1),write_str(Str1).
