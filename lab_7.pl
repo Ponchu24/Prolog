@@ -143,3 +143,30 @@ get_6first([H|T],I,Cur_res,Res):-append(Cur_res,[H],Cur_res1),I1 is I-1,get_6fir
 pr11_less_10(Str,Res):-add_o(Str,Str1),lenght(Str1,Lenght),(Lenght<12->pr11_less_10(Str1,Res);Res = Str1).
 add_o(Str,Res):-append([111],Str,Res).
 
+%12. Дана строка. Разделить строку на фрагменты по три подряд идущих
+% символа. В каждом фрагменте средний символ заменить на случайный
+% символ, не совпадающий ни с одним из символов этого фрагмента.
+% Показать фрагменты, упорядоченные по алфавиту.
+
+pr12:-read_str(Str,_),split(Str,List),pr12_change_fragments(List,Rand_list),sort(0,=<,Rand_list,Res),write_all(Res).
+
+pr12_change_fragments(List,Res):-pr12_change_fragments(List,[],Res).
+pr12_change_fragments([],Res,Res):-!.
+pr12_change_fragments([H|T],Cur_res,Res):-random_second(H,H1),append(Cur_res,[H1],Cur_res1),pr12_change_fragments(T,Cur_res1,Res).
+
+write_all([]):-!.
+write_all([H|T]):-write_str(H),nl,write_all(T).
+
+split(Str,Res):-split(Str,0,[],[],Res).
+split(Str,3,Cur_word,Cur_res,Res):-append(Cur_res,[Cur_word],Cur_res1),split(Str,0,[],Cur_res1,Res),!.
+split([],_,_,Res,Res):-!.
+split([H|T],I,Cur_word,Cur_res,Res):-I1 is I+1,append(Cur_word,[H],Cur_word1),split(T,I1,Cur_word1,Cur_res,Res).
+
+random_second([H|T],Res):-I is H+1,randomm(T,I,Rand),change_second([H|T],Rand,Res).
+randomm([],I,I):-!.
+randomm([H|T],Cur_I,I):-Cur_I is H -> Cur_I1 is Cur_I+1,randomm(T,Cur_I1,I);randomm(T,Cur_I,I).
+
+change_second(Str,Rand,Res):-change_second(Str,Rand,1,[],Res).
+change_second([_|T],Rand,2,Cur_res,Res):-append(Cur_res,[Rand],Cur_res1),append(Cur_res1,T,Res),!.
+change_second([H|T],Rand,I,Cur_res,Res):-append(Cur_res,[H],Cur_res1),I1 is I+1,change_second(T,Rand,I1,Cur_res1,Res).
+
