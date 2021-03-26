@@ -19,6 +19,15 @@ write_list_str([H|T]):-write_str(H),nl,write_list_str(T).
 write_str([]):-!.
 write_str([H|Tail]):-put(H),write_str(Tail).
 
-% 1.1. Дан файл. Прочитать из файла строки и вывести длину наибольшей
+%1.1. Дан файл. Прочитать из файла строки и вывести длину наибольшей
 % строки.
-pr1_1:- see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(_, LengthList), seen, max_member(Max,LengthList), write(Max).
+pr1_1:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(_, LengthList),seen,max_member(Max,LengthList),write(Max).
+
+%1.2. Дан файл. Определить, сколько в файле строк, не содержащих
+% пробелы.
+pr1_2:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr,_),seen,pr1_2(ListStr,Res),write(Res).
+
+pr1_2(ListStr,Res):-pr1_2(ListStr,0,Res).
+pr1_2([],Res,Res):-!.
+pr1_2([H|T],Cur_res,Res):-not(member(32,H)),Cur_res1 is Cur_res+1,pr1_2(T,Cur_res1,Res),!.
+pr1_2([_|T],Cur_res,Res):-pr1_2(T,Cur_res,Res).
