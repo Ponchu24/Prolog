@@ -212,3 +212,11 @@ pr17:-read_str(Str,_),pr17(Str,Res),write_str(Res).
 pr17([],[]):-!.
 pr17([120|T],T1):-pr10_abc(T),pr17(T,T1),!.
 pr17([H|T],[H|T1]):-pr17(T,T1).
+
+%18. Удалите в строке все 'abc', за которыми следует цифра.
+
+pr18:-read_str(Str,_),pr18(Str,Res),write_str(Res).
+
+pr18([],[]):-!.
+pr18([97|[98|[99|[H|T]]]],[H|T1]):-H>=48,H=<57,pr18(T,T1),!.
+pr18([H|T],[H|T1]):-pr18(T,T1).
