@@ -259,3 +259,11 @@ get_word21([H|T],Symb,Word,Word1,Str2):-append(Word,[H],Word2),get_word21(T,Symb
 
 skip_symbs([H|T],Symb,Str1):-member(H,Symb),skip_symbs(T,Symb,Str1),!.
 skip_symbs(Str1,_,Str1).
+
+%22. Дана строка. Вывести первый, последний и средний (если он есть))
+% символы.
+
+pr22:-read_str([H|T],Lenght),last([H|T],Last),
+    (1 is Lenght mod 2 ->
+    Index is Lenght div 2+1,nth1(Index,[H|T],Center),write("Center: "),write_str([Center]),nl,write("First: "),write_str([H]),nl,write("Last: "),write_str([Last]);
+    write("First: "),write_str([H]),nl,write("Last: "),write_str([Last])).
