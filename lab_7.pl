@@ -113,4 +113,16 @@ pr9:-read_str(Str1,Lenght1),read_str(Str2,Lenght2),(Lenght1>Lenght2 -> Diff is L
 write_I_times(_,0):-!.
 write_I_times(Str,I):-write_str(Str),nl,I1 is I-1,write_I_times(Str,I1).
 
-%10.
+%10. ƒана строка. ≈сли она начинаетс€ на 'abc', то заменить их на 'www',
+% иначе добавить в конец строки 'zzz'.
+
+pr10:-read_str(Str,_),(pr10_abc(Str) -> change_first_www(Str,Res);append(Str,[122,122,122],Res)),write_str(Res).
+
+change_first_www(Str,Res):-change_first_www(Str,3,Res).
+change_first_www(Str,0,Res):-append([119,119,119],Str,Res),!.
+change_first_www([_|T],I,Res):-I1 is I-1,change_first_www(T,I1,Res).
+
+pr10_abc([97|[98|[99|_]]]).
+%pr10_a([97|T]):-pr10_b(T).
+%pr10_b([98|T]):-pr10_c(T).
+%pr10_c([99|_]).
