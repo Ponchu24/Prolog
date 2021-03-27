@@ -102,3 +102,23 @@ get_prop(Str,Res):-get_prop(Str,[],Res).
 get_prop([],Res,Res):-!.
 get_prop([H|T],Cur_res,Res):-H>=65,H=<90,append(Cur_res,[H],Cur_res1),get_prop(T,Cur_res1,Res),!.
 get_prop([_|T],Cur_res,Res):-get_prop(T,Cur_res,Res).
+
+%2.14. ƒана строка в которой записаны слова через пробел. Ќеобходимо
+% упор€дочить слова по количеству букв в каждом слове.
+
+pr2_14:-read_str(Str,_,_),split(Str,Str1),bubble(Str1,Res),write_list_str(Res).
+
+split(Str,Res):-split(Str,[],Res).
+split([],Res,Res):-!.
+split(Str,Cur_res,Res):-get_word_space(Str,Word,Str1),append(Cur_res,[Word],Cur_res1),split(Str1,Cur_res1,Res),!.
+
+get_word_space([],[],[]):-!.
+get_word_space(Str,Word,Str2):-get_word_space(Str,[],Word,Str2).
+get_word_space([],Word,Word,[]).
+get_word_space([H|T],Word,Word,T):-H=32,!.
+get_word_space([H|T],Word,Word1,Str2):-append(Word,[H],Word2),get_word_space(T,Word2,Word1,Str2).
+
+bubble_iter([X,Y|T],[Y,X|T]) :- length(X, LengthX), length(Y, LengthY), LengthX > LengthY, !.
+bubble_iter([X|T],[X|T1]) :- bubble_iter(T, T1).
+bubble(List,List_res) :- bubble_iter(List, List1), bubble(List1,List_res),!.
+bubble(List,List):-!.
