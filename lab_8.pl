@@ -163,3 +163,13 @@ pr4_5(Str,Res):-pr4_5(Str,0,0,Res).
 pr4_5([],I,Cur_res,Res):-I>Cur_res->Res is I;Res is Cur_res,!.
 pr4_5([H|T],I,Cur_res,Res):-H>=1040,H=<1103->I1 is I+1,pr4_5(T,I1,Cur_res,Res),!.
 pr4_5([_|T],I,Cur_res,Res):-I>Cur_res->Cur_res1 is I,pr4_5(T,0,Cur_res1,Res);pr4_5(T,0,Cur_res,Res).
+
+%4.14. Дана строка. Необходимо найти наибольшее количество идущих
+% подряд цифр.
+
+pr4_14:-read_str(Str,_,_),pr4_14(Str,Res),write(Res).
+
+pr4_14(Str,Res):-pr4_14(Str,0,0,Res).
+pr4_14([],I,Cur_res,Res):-I>Cur_res->Res is I;Res is Cur_res,!.
+pr4_14([H|T],I,Cur_res,Res):-H>=48,H=<57->I1 is I+1,pr4_14(T,I1,Cur_res,Res),!.
+pr4_14([_|T],I,Cur_res,Res):-I>Cur_res->Cur_res1 is I,pr4_14(T,0,Cur_res1,Res);pr4_14(T,0,Cur_res,Res).
