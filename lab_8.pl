@@ -64,7 +64,7 @@ pr1_4(Str,Cur_count,Cur_word,Res):-skip_space_marks(Str,Str1),get_word(Str1,Word
 skip_space_marks([H|T],Str1):-(H=32;H=40;H=41;H=43;H=44;H=46;H=47;H=10),skip_space_marks(T,Str1),!.
 skip_space_marks(Str1,Str1).
 
-get_word([],[],[]):-!.
+%get_word([],[],[]):-!.
 get_word(Str,Word,Str2):-get_word(Str,[],Word,Str2).
 get_word([],Word,Word,[]).
 get_word([H|T],Word,Word,T):-(H=32;H=40;H=41;H=43;H=44;H=46;H=47;H=10),!.
@@ -79,7 +79,7 @@ numb_same_words(Word,Str,Cur_count,Count):-skip_space_marks(Str,Str1),get_word(S
 
 pr1_5:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr),seen,add_enter(ListStr,ListStr1),append(ListStr1,Str),tell('C:/Users/HP/Documents/Prolog/lab_8#1_5.txt'),pr1_5_write(ListStr,Str),told.
 
-check:-read_str(Str,_,_),write(Str).
+get_code:-read_str(Str,_,_),write(Str).
 
 pr1_5_write([],_):-!.
 pr1_5_write([H|T],All_str):-pr1_5_repeat_check(H,All_str),write_str(H),nl,pr1_5_write(T,All_str),!.
@@ -112,7 +112,7 @@ split(Str,Res):-split(Str,[],Res).
 split([],Res,Res):-!.
 split(Str,Cur_res,Res):-get_word_space(Str,Word,Str1),append(Cur_res,[Word],Cur_res1),split(Str1,Cur_res1,Res),!.
 
-get_word_space([],[],[]):-!.
+%get_word_space([],[],[]):-!.
 get_word_space(Str,Word,Str2):-get_word_space(Str,[],Word,Str2).
 get_word_space([],Word,Word,[]).
 get_word_space([H|T],Word,Word,T):-H=32,!.
@@ -122,6 +122,37 @@ bubble_iter([X,Y|T],[Y,X|T]) :- length(X, LengthX), length(Y, LengthY), LengthX 
 bubble_iter([X|T],[X|T1]) :- bubble_iter(T, T1).
 bubble(List,List_res) :- bubble_iter(List, List1), bubble(List1,List_res),!.
 bubble(List,List):-!.
+
+%3. Дана строка. Необходимо найти все даты, которые описаны в
+% виде "31 февраля 2007".
+
+pr3:-read_str(Str,_,_),pr3(Str,Res),write_list_str(Res).
+
+pr3(Str,Res):-pr3(Str,[],Res).
+pr3([],Res,Res):-!.
+pr3([H,H1,H2|T],Cur_res,Res):-H>=48,H=<57,H1>=49,H1=<57,H2=32,get_word_space(T,Month,T1),month(Month),get_year(T1,Year,T2),append([H,H1,H2,32],[],Date),append(Date,Month,Date1),append(Date1,[32],Date2),append(Date2,Year,Date3),append(Cur_res,[Date3],Cur_res1),pr3(T2,Cur_res1,Res),!.
+pr3([_|T],Cur_res,Res):-pr3(T,Cur_res,Res).
+
+get_year(Str,Year,Str1):-get_year(Str,4,[],Year,Str1).
+get_year(Str,0,Year,Year,Str):-!.
+get_year([H|T],I,Cur_year,Year,Str1):-H>=48,H=<57,I1 is I-1,append(Cur_year,[H],Cur_year1),get_year(T,I1,Cur_year1,Year,Str1).
+
+get_month(Str,Word,Str2):-get_month(Str,[],Word,Str2).
+get_month([H|T],Word,Word,[H|T]):-H<1072,!;H>1103,!.
+get_month([H|T],Word,Word1,Str2):-append(Word,[H],Word2),get_month(T,Word2,Word1,Str2).
+
+month([1103,1085,1074,1072,1088,1103]).
+month([1092,1077,1074,1088,1072,1083,1103]).
+month([1084,1072,1088,1090,1072]).
+month([1072,1087,1088,1077,1083,1103]).
+month([1084,1072,1103]).
+month([1080,1102,1085,1103]).
+month([1080,1102,1083,1103]).
+month([1072,1074,1075,1091,1089,1090,1072]).
+month([1089,1077,1085,1090,1103,1073,1088,1103]).
+month([1086,1082,1090,1103,1073,1088,1103]).
+month([1085,1086,1103,1073,1088,1103]).
+month([1076,1077,1082,1072,1073,1088,1103]).
 
 %4.5. Дана строка. Необходимо найти наибольшее количество идущих
 % подряд символов кириллицы.
