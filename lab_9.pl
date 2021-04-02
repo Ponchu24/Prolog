@@ -110,3 +110,20 @@ word_2_2_only(A,N,Perm):-in_list(A,El),N1 is N-1,word_2_2_only(A,N1,[El|Perm]).
 count_2_2_only(List):-count_2_2_only(List,List).
 count_2_2_only(List,[H|_]):-count_symb(List,H,C),C=2,del_all(List,H,List1),count_2_only(List1),!.
 count_2_2_only(List,[_|T]):-count_2_2_only(List,T).
+
+%6. ƒано множество {a,b,c,d,e,f}. ѕостроить все слова длины 7, в
+%которых ровно 1 буква повтор€ютс€ 2 раза, ровно одна буква повтор€етс€
+%3 раза остальные буквы не повтор€ютс€. ¬ывод в файл.
+
+pr6:-A=[a,b,c,d,e,f],tell('C:/Users/HP/Documents/Prolog/lab9files/6.txt'),not(word_2_3_only(A,7,[])),told.
+
+word_2_3_only(_,0,Perm):-!,count_2_3_only(Perm),write_str(Perm),nl,fail.
+word_2_3_only(A,N,Perm):-in_list(A,El),N1 is N-1,word_2_3_only(A,N1,[El|Perm]).
+
+count_2_3_only(List):-count_2_3_only(List,List).
+count_2_3_only(List,[H|_]):-count_symb(List,H,C),C=2,del_all(List,H,List1),count_X_only(List1,3),!.
+count_2_3_only(List,[_|T]):-count_2_3_only(List,T).
+
+count_X_only(List,X):-count_X_only(List,X,List).
+count_X_only(List,X,[H|_]):-count_symb(List,H,C),C=X,del_all(List,H,T1),is_set(T1),!.
+count_X_only(List,X,[_|T]):-count_X_only(List,X,T).
