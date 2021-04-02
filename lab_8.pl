@@ -194,4 +194,20 @@ pr4_14([_|T],I,Cur_res,Res):-I>Cur_res->Cur_res1 is I,pr4_14(T,0,Cur_res1,Res);p
 
 %5. Задание 5 Прочитать список строк из файла. Упорядочить по длине
 % строки.
+
 pr5:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr),seen,bubble(ListStr,Res),write_list_str(Res).
+
+%6. Задание 6 Дан список строк из файла. Упорядочить по количеству слов в
+% строке.
+
+pr6:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr),seen,bubble_count_words(ListStr,Res),write_list_str(Res).
+
+count_words(Str,Count):-count_words(Str,0,Count).
+count_words([],K,K):-!.
+count_words(Str,I,K):-skip_space_marks(Str,Str1),get_word(Str1,Word,Str2),Word\=[],I1 is I+1,count_words(Str2,I1,K),!.
+count_words(_,K,K).
+
+bubble_count_words_iter([X,Y|T],[Y,X|T]) :- count_words(X,Count_X),count_words(Y,Count_Y), Count_X > Count_Y, !.
+bubble_count_words_iter([X|T],[X|T1]) :- bubble_count_words_iter(T, T1).
+bubble_count_words(List,List_res) :- bubble_count_words_iter(List, List1), bubble_count_words(List1,List_res),!.
+bubble_count_words(List,List):-!.
