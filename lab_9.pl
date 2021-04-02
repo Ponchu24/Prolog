@@ -47,9 +47,15 @@ sub([_|List],Sub):-sub(List,Sub).
 
 pr1_5:-read_str(A,_),read(K),k_perm(A,K,K_perms),write_str(K_perms),nl,fail.
 
-k_perm([],0,_):-!.
+k_perm(_,0,[]):-!.
 k_perm([H|List],K,[H|Sub]):-K1 is K-1,k_perm(List,K1,Sub).
 k_perm([_|List],K,Sub):-k_perm(List,K,Sub).
 
-make_ar(0,[]):-!.
-make_ar(K,[K|Tail]):-K1 is K-1,make_ar(K1,Tail).
+%1.6. Дано множество. Построить все сочетания с повторениями.
+
+pr1_6:-read_str(A,_),read(K),k_perm_rep(A,K,K_perms),write_str(K_perms),nl,fail.
+
+k_perm_rep(_,0,[]):-!.
+k_perm_rep([H|List],K,[H|Sub]):-K1 is K-1,k_perm_rep([H|List],K1,Sub).
+k_perm_rep([_|List],K,Sub):-k_perm_rep(List,K,Sub).
+
