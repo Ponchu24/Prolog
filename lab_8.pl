@@ -289,3 +289,26 @@ get_nums(Str,Res):-get_nums(Str,[],Res).
 get_nums([],Res,Res):-!.
 get_nums(Str,Cur_res,Res):-skip_space_marks(Str,Str1),get_num(Str1,Num_code,Str2),Num_code\=[],number_chars(Num,Num_code),append(Cur_res,[Num],Cur_res1),get_nums(Str2,Cur_res1,Res),!.
 get_nums(_,Res,Res):-!.
+
+%8.9. В порядке увеличения квадратичного отклонения между наибольшим
+% ASCII-кодом символа строки и разницы в ASCII-кодах пар зеркально
+% расположенных символов строки (относительно ее середины).
+
+pr8_9:-see('C:/Users/HP/Documents/Prolog/lab_8_8_9.txt'),read_list_str(ListStr),seen,all_kvad_ot(ListStr,Kvad_ot_list),bubble8_9(ListStr,Kvad_ot_list,_,Res),write_list_str(Res).
+
+all_kvad_ot(ListStr,Res):-all_kvad_ot(ListStr,[],Res).
+all_kvad_ot([],Res,Res):-!.
+all_kvad_ot([H|T],Cur_res,Res):-max_list(H,Max),length(H,Leng),diff_list(H,Leng,Diff),length(Diff,LengD),kvad_ot(Max,LengD,Diff,Kvad_ot),append(Cur_res,[Kvad_ot],Cur_res1),all_kvad_ot(T,Cur_res1,Res).
+
+kvad_ot(X,N,ListX,Res):-kvad_ot(X,N,ListX,0,Res).
+kvad_ot(_,N,[],Cur_res,Res):-Expr is Cur_res/N,Res is sqrt(Expr),!.
+kvad_ot(X,N,[H|T],Cur_res,Res):-Expr is H-X,Expr1 is Expr*Expr,Cur_res1 is Cur_res+Expr1,kvad_ot(X,N,T,Cur_res1,Res).
+
+diff_list(Str,LengStr,Res):-diff_list(Str,1,LengStr,[],Res).
+diff_list(_,I,LengStr,Res,Res):-I>LengStr/2,!.
+diff_list(Str,I,LengStr,Cur_res,Res):-nth1(I,Str,N1),II is LengStr-I+1,nth1(II,Str,N2),Diff is abs(N2-N1),append(Cur_res,[Diff],Cur_res1),I1 is I+1,diff_list(Str,I1,LengStr,Cur_res1,Res).
+
+bubble_iter8_9([X,Y|T],[Xk,Yk|T1],[Yk,Xk|T1],[Y,X|T]):-Xk>Yk,!.
+bubble_iter8_9([X|T],[Xk|Tk],[Xk|Tk1],[X|T1]) :- bubble_iter8_9(T,Tk,Tk1,T1).
+bubble8_9(List,Kvad,New_kvad,List_res) :- bubble_iter8_9(List,Kvad,New_kvad,List1), bubble8_9(List1,New_kvad,_,List_res),!.
+bubble8_9(List,_,_,List):-!.
