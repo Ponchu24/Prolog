@@ -127,3 +127,28 @@ count_2_3_only(List,[_|T]):-count_2_3_only(List,T).
 count_X_only(List,X):-count_X_only(List,X,List).
 count_X_only(List,X,[H|_]):-count_symb(List,H,C),C=X,del_all(List,H,T1),is_set(T1),!.
 count_X_only(List,X,[_|T]):-count_X_only(List,X,T).
+
+%7. Дано множество {a,b,c,d,e,f}. Построить все слова длины 9, в
+% которых ровно 2 буквы повторяются 2 раза, ровно одна буква повторяется
+% три раза, остальные буквы не повторяются. Вывод в файл.
+
+pr7:-A=[a,b,c,d,e,f],tell('C:/Users/HP/Documents/Prolog/lab9files/7.txt'),not(word_2_2_3_only(A,9,[])),told.
+
+word_2_2_3_only(_,0,Perm):-!,count_2_2_3_only(Perm),write_str(Perm),nl,fail.
+word_2_2_3_only(A,N,Perm):-in_list(A,El),N1 is N-1,word_2_2_3_only(A,N1,[El|Perm]).
+
+count_2_2_3_only(List):-count_2_2_3_only(List,List).
+count_2_2_3_only(List,[H|_]):-count_symb(List,H,C),C=3,del_all(List,H,List1),count_2_2_only(List1),!.
+count_2_2_3_only(List,[_|T]):-count_2_2_3_only(List,T).
+
+%8. Дано множество {a,b,c,d,e,f}. Построить все слова длины 4, в
+% которых больше двух букв а. Вывод в файл.
+
+pr8:-A=[a,b,c,d,e,f],tell('C:/Users/HP/Documents/Prolog/lab9files/8.txt'),not(word_more_2a(A,4,[])),told.
+
+word_more_2a(_,0,Perm):-!,count_symb(Perm,a,C),C>2,write_str(Perm),nl,fail.
+word_more_2a(A,N,Perm):-in_list(A,El),N1 is N-1,word_more_2a(A,N1,[El|Perm]).
+
+count_more_X(List,X):-count_more_X(List,X,List).
+count_more_X(List,X,[H|_]):-count_symb(List,H,C),C>X,!.
+count_more_X(List,X,[_|T]):-count_more_X(List,X,T).
