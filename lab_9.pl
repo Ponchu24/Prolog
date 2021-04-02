@@ -14,13 +14,21 @@ in_list_exlude([H|T],El,[H|T1]):-in_list_exlude(T,El,T1).
 %1.1. Дано множество. Построить все размещения с повторениями по k
 % элементов.
 
-pr1_1:-read_str(A,_),read(K),k_perm_rep(A,K,[]).
-k_perm_rep(_,0,Perm):-write_str(Perm),nl,!,fail.
-k_perm_rep(A,N,Perm):-in_list(A,El),N1 is N-1,k_perm_rep(A,N1,[El|Perm]).
+pr1_1:-read_str(A,_),read(K),k_arr_rep(A,K,[]).
+
+k_arr_rep(_,0,Perm):-write_str(Perm),nl,!,fail.
+k_arr_rep(A,N,Perm):-in_list(A,El),N1 is N-1,k_arr_rep(A,N1,[El|Perm]).
 
 %1.2. Дано множество. Построить все перестановки.
 
 pr1_2:-read_str(A,_),perm(A,[]).
+
 perm([],Perm):-write_str(Perm),nl,!,fail.
 perm(A,Perm):-in_list_exlude(A,El,A1),perm(A1,[El|Perm]).
 
+%1.3. Дано множество. Построить все размещения по k элементов.
+
+pr1_3:-read_str(A,_),read(K),k_arr(A,K,[]).
+
+k_arr(_,0,Perm):-write_str(Perm),nl,!,fail.
+k_arr(A,N,Perm):-in_list_exlude(A,El,A1),N1 is N-1,k_arr(A1,N1,[El|Perm]).
