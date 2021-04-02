@@ -191,3 +191,7 @@ pr4_14(Str,Res):-pr4_14(Str,0,0,Res).
 pr4_14([],I,Cur_res,Res):-I>Cur_res->Res is I;Res is Cur_res,!.
 pr4_14([H|T],I,Cur_res,Res):-H>=48,H=<57->I1 is I+1,pr4_14(T,I1,Cur_res,Res),!.
 pr4_14([_|T],I,Cur_res,Res):-I>Cur_res->Cur_res1 is I,pr4_14(T,0,Cur_res1,Res);pr4_14(T,0,Cur_res,Res).
+
+%5. Задание 5 Прочитать список строк из файла. Упорядочить по длине
+% строки.
+pr5:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr),seen,bubble(ListStr,Res),write_list_str(Res).
