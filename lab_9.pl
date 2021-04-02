@@ -32,3 +32,12 @@ pr1_3:-read_str(A,_),read(K),k_arr(A,K,[]).
 
 k_arr(_,0,Perm):-write_str(Perm),nl,!,fail.
 k_arr(A,N,Perm):-in_list_exlude(A,El,A1),N1 is N-1,k_arr(A1,N1,[El|Perm]).
+
+%1.4. Дано множество. Построить все подмножества.
+
+pr1_4:-read_str(A,_),sub(A,Sub),write_str(Sub),nl,fail.
+
+sub([],[]).
+sub([H|List],[H|Sub]):-sub(List,Sub).
+sub([_|List],Sub):-sub(List,Sub).
+
