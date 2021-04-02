@@ -13,6 +13,10 @@ in_list([_|T],El):-in_list(T,El).
 in_list_exlude([El|T],El,T).
 in_list_exlude([H|T],El,[H|T1]):-in_list_exlude(T,El,T1).
 
+del_all([],_,[]):-!.
+del_all([H|T],El,[H|T1]):-H\=El,del_all(T,El,T1),!.
+del_all([_|T],El,T1):-del_all(T,El,T1).
+
 %1.1. Дано множество. Построить все размещения с повторениями по k
 % элементов.
 
@@ -58,4 +62,21 @@ pr1_6:-read_str(A,_),read(K),k_perm_rep(A,K,K_perms),write_str(K_perms),nl,fail.
 k_perm_rep(_,0,[]):-!.
 k_perm_rep([H|List],K,[H|Sub]):-K1 is K-1,k_perm_rep([H|List],K1,Sub).
 k_perm_rep([_|List],K,Sub):-k_perm_rep(List,K,Sub).
+
+%2.
+
+pr2:-A=[a,b,c,d,e,f],tell('C:/Users/HP/Documents/Prolog/lab9files/2.txt'),not(word_2a(A,5,[])),told.
+
+word_2a(_,0,Perm):-!,count_symb(Perm,a,C),C=2,del_all(Perm,a,Perm1),is_set(Perm1),write_str(Perm),nl,fail.
+word_2a(A,N,Perm):-in_list(A,El),N1 is N-1,word_2a(A,N1,[El|Perm]).
+
+count_symb(Str,Symb,Res):-count_symb(Str,Symb,0,Res),!.
+count_symb([],_,Res,Res):-!.
+count_symb([H|T],H,Cur_res,Res):-Cur_res1 is Cur_res+1,count_symb(T,H,Cur_res1,Res),!.
+count_symb([_|T],S,Cur_res,Res):-count_symb(T,S,Cur_res,Res).
+
+
+
+
+
 
