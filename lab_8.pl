@@ -241,3 +241,33 @@ get_word_num(Str,Word,Str2):-get_word_num(Str,[],Word,Str2).
 get_word_num([],Word,Word,[]).
 get_word_num([H|T],Word,Word,[H|T]):-(H=32;(H>=48,H=<57)),!.
 get_word_num([H|T],Word,Word1,Str2):-append(Word,[H],Word2),get_word_num(T,Word2,Word1,Str2).
+
+%8.2. В порядке увеличения среднего веса ASCII-кода символа строки
+
+pr8_2:-see('C:/Users/HP/Documents/Prolog/lab_8_8_2.txt'),read_list_str(ListStr),seen,sred_list(ListStr,Sred_list),write(Sred_list),nl,bubble8_2(ListStr,Sred_list,_,Res),write_list_str(Res).
+
+
+sred_list(List,Res):-sred_list(List,[],Res).
+sred_list([],Res,Res):-!.
+sred_list([H|T],Cur_res,Res):-str_bin(H,Bin),count1(Bin,Count),sred(H,Count,Sred),append(Cur_res,[Sred],Cur_res1),sred_list(T,Cur_res1,Res).
+
+sred(Str,Count1,Res):-length(Str,Length),Res is Count1/Length.
+
+count1(List,Res):-count1(List,0,Res).
+count1([],Res,Res):-!.
+count1([1|T],Cur_res,Res):-Cur_res1 is Cur_res+1,count1(T,Cur_res1,Res),!.
+count1([_|T],Cur_res,Res):-count1(T,Cur_res,Res).
+
+str_bin(Str,Res):-str_bin(Str,[],Res).
+str_bin([],Res,Res):-!.
+str_bin([H|T],Cur_res,Res):-binary(H,Hb),append(Cur_res,Hb,Cur_res1),str_bin(T,Cur_res1,Res).
+
+binary(Num,Res):-bin(Num,Bin),reverse(Bin,Res).
+bin(1,[1]):-!.
+bin(0,[0]):-!.
+bin(Num,[H|T]):-H is Num mod 2,Num1 is Num div 2,bin(Num1,T),!.
+
+bubble_iter8_2([X,Y|T],[Xs,Ys|T1],[Ys,Xs|T1],[Y,X|T]):-Xs>Ys,!.
+bubble_iter8_2([X|T],[Xs|Ts],[Xs|Ts1],[X|T1]) :- bubble_iter8_2(T,Ts,Ts1,T1).
+bubble8_2(List,Sred,New_sred,List_res) :- bubble_iter8_2(List,Sred,New_sred,List1), bubble8_2(List1,New_sred,_,List_res),!.
+bubble8_2(List,_,_,List):-!.
