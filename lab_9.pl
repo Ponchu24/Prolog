@@ -63,13 +63,21 @@ k_perm_rep(_,0,[]):-!.
 k_perm_rep([H|List],K,[H|Sub]):-K1 is K-1,k_perm_rep([H|List],K1,Sub).
 k_perm_rep([_|List],K,Sub):-k_perm_rep(List,K,Sub).
 
+%2. Дано множество {a,b,c,d,e,f}. Построить все слова длины 5, в
+% которых ровно две буквы a. Вывод в файл.
+
+pr2:-A=[a,b,c,d,e,f],tell('C:/Users/HP/Documents/Prolog/lab9files/2.txt'),not(word_2a(A,5,[])),told.
+
+word_2a(_,0,Perm):-!,count_symb(Perm,a,C),C=2,write_str(Perm),nl,fail.
+word_2a(A,N,Perm):-in_list(A,El),N1 is N-1,word_2a(A,N1,[El|Perm]).
+
 %3. Задание 3 Дано множество {a,b,c,d,e,f}. Построить все слова длины 5, в
 % которых ровно 2 буквы a, остальные буквы не повторяются. Вывод в файл.
 
-pr3:-A=[a,b,c,d,e,f],tell('C:/Users/HP/Documents/Prolog/lab9files/2.txt'),not(word_2a(A,5,[])),told.
+pr3:-A=[a,b,c,d,e,f],tell('C:/Users/HP/Documents/Prolog/lab9files/3.txt'),not(word_2a_only(A,5,[])),told.
 
-word_2a(_,0,Perm):-!,count_symb(Perm,a,C),C=2,del_all(Perm,a,Perm1),is_set(Perm1),write_str(Perm),nl,fail.
-word_2a(A,N,Perm):-in_list(A,El),N1 is N-1,word_2a(A,N1,[El|Perm]).
+word_2a_only(_,0,Perm):-!,count_symb(Perm,a,C),C=2,del_all(Perm,a,Perm1),is_set(Perm1),write_str(Perm),nl,fail.
+word_2a_only(A,N,Perm):-in_list(A,El),N1 is N-1,word_2a_only(A,N1,[El|Perm]).
 
 count_symb(Str,Symb,Res):-count_symb(Str,Symb,0,Res),!.
 count_symb([],_,Res,Res):-!.
