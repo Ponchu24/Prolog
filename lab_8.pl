@@ -312,3 +312,24 @@ bubble_iter8_9([X,Y|T],[Xk,Yk|T1],[Yk,Xk|T1],[Y,X|T]):-Xk>Yk,!.
 bubble_iter8_9([X|T],[Xk|Tk],[Xk|Tk1],[X|T1]) :- bubble_iter8_9(T,Tk,Tk1,T1).
 bubble8_9(List,Kvad,New_kvad,List_res) :- bubble_iter8_9(List,Kvad,New_kvad,List1), bubble8_9(List1,New_kvad,_,List_res),!.
 bubble8_9(List,_,_,List):-!.
+
+%8.12. В порядке увеличение квадратичного отклонения частоты
+% встречаемости самого распространенного символа в наборе строк от
+% частоты его встречаемости в данной строке
+
+pr8_12:-see('C:/Users/HP/Documents/Prolog/lab_8_8_12.txt'),read_list_str(ListStr),seen,append(ListStr,AllStr),max_count(AllStr,S,Sc),all_kvad_ot12(ListStr,Sc,S,Kvad),bubble8_9(ListStr,Kvad,_,Res),write_list_str(Res).
+
+all_kvad_ot12(ListStr,Sc,S,Res):-all_kvad_ot12(ListStr,Sc,S,[],Res).
+all_kvad_ot12([],_,_,Res,Res):-!.
+all_kvad_ot12([H|T],S,Sc,Cur_res,Res):-count_symb(H,S,Count),kvad_ot(Sc,2,[Count],Kvad),append(Cur_res,[Kvad],Cur_res1),all_kvad_ot12(T,S,Sc,Cur_res1,Res).
+
+
+count_symb(Str,Symb,Res):-count_symb(Str,Symb,0,Res).
+count_symb([],_,Res,Res):-!.
+count_symb([H|T],H,Cur_res,Res):-Cur_res1 is Cur_res+1,count_symb(T,H,Cur_res1,Res),!.
+count_symb([_|T],S,Cur_res,Res):-count_symb(T,S,Cur_res,Res).
+
+max_count(Str,S,Max):-max_count(Str,_,0,S,Max).
+max_count([],S,Max,S,Max):-!.
+max_count([H|T],_,Cur_max,SRes,Max):-count_symb([H|T],H,HMax),HMax>Cur_max,max_count(T,H,HMax,SRes,Max),!.
+max_count([_|T],S,Cur_max,SRes,Max):-max_count(T,S,Cur_max,SRes,Max).
