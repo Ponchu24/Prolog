@@ -164,6 +164,24 @@ pr4_5([],I,Cur_res,Res):-I>Cur_res->Res is I;Res is Cur_res,!.
 pr4_5([H|T],I,Cur_res,Res):-H>=1040,H=<1103->I1 is I+1,pr4_5(T,I1,Cur_res,Res),!.
 pr4_5([_|T],I,Cur_res,Res):-I>Cur_res->Cur_res1 is I,pr4_5(T,0,Cur_res1,Res);pr4_5(T,0,Cur_res,Res).
 
+%4.7. Дана строка. Необходимо найти минимальное из имеющихся в ней
+%натуральных чисел.
+
+pr4_7:-read_str(Str,_,_),pr4_7(Str,Res),write(Res).
+
+pr4_7(Str,Res):-pr4_7_first(Str,[],Str1,First_num),pr4_7(Str1,[],First_num,Res).
+
+pr4_7_first([H|T],Num,Str,Res):-H>=49,H=<57,append(Num,[H],Num1),pr4_7_first(T,Num1,Str,Res),!.
+pr4_7_first([_|T],[],Str,Res):-pr4_7_first(T,[],Str,Res),!.
+pr4_7_first([_|T],Num,Str,Res):-number_chars(Res,Num),Str=T.
+
+pr4_7([],Num,Cur_res,Res):-number_chars(Number,Num),(Number<Cur_res->Res=Number;Res=Cur_res),!.
+pr4_7([H|T],Num,Cur_res,Res):-H>=49,H=<57,append(Num,[H],Num1),pr4_7(T,Num1,Cur_res,Res),!.
+pr4_7([_|T],[],Cur_res,Res):-pr4_7(T,[],Cur_res,Res),!.
+pr4_7([_|T],Num,Cur_res,Res):-number_chars(Number,Num),Number<Cur_res,pr4_7(T,[],Number,Res),!.
+pr4_7([_|T],_,Cur_res,Res):-pr4_7(T,[],Cur_res,Res).
+
+
 %4.14. Дана строка. Необходимо найти наибольшее количество идущих
 % подряд цифр.
 
