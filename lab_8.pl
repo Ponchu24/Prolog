@@ -271,3 +271,21 @@ bubble_iter8_2([X,Y|T],[Xs,Ys|T1],[Ys,Xs|T1],[Y,X|T]):-Xs>Ys,!.
 bubble_iter8_2([X|T],[Xs|Ts],[Xs|Ts1],[X|T1]) :- bubble_iter8_2(T,Ts,Ts1,T1).
 bubble8_2(List,Sred,New_sred,List_res) :- bubble_iter8_2(List,Sred,New_sred,List1), bubble8_2(List1,New_sred,_,List_res),!.
 bubble8_2(List,_,_,List):-!.
+
+%8.6. В порядке увеличения медианного значения выборки строк.
+%(прошлое медианное значение удаляется из выборки и производится поиск
+%нового медианного значения).
+
+pr8_6:-see('C:/Users/HP/Documents/Prolog/lab_8_8_6.txt'),read_list_str(ListStr),seen,bubble8_6(ListStr,Res),write_list_str(Res).
+
+bubble_iter8_6([X,Y|T],[Y,X|T]) :- median(X, MedX), median(Y, MedY), MedX > MedY, !.
+bubble_iter8_6([X|T],[X|T1]) :- bubble_iter8_6(T, T1).
+bubble8_6(List,List_res) :- bubble_iter8_6(List, List1), bubble8_6(List1,List_res),!.
+bubble8_6(List,List):-!.
+
+median(Str,Res):-get_nums(Str,Nums),sort(Nums,Sorted_nums),length(Sorted_nums,Leng),(1 is Leng mod 2->Cent is (Leng div 2)+1,nth1(Cent,Sorted_nums,Res);Cent1 is (Leng div 2),Cent2 is Cent1+1,nth1(Cent1,Sorted_nums,N1),nth1(Cent2,Sorted_nums,N2),Res is ((N1+N2)/2)).
+
+get_nums(Str,Res):-get_nums(Str,[],Res).
+get_nums([],Res,Res):-!.
+get_nums(Str,Cur_res,Res):-skip_space_marks(Str,Str1),get_num(Str1,Num_code,Str2),Num_code\=[],number_chars(Num,Num_code),append(Cur_res,[Num],Cur_res1),get_nums(Str2,Cur_res1,Res),!.
+get_nums(_,Res,Res):-!.
