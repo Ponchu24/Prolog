@@ -64,6 +64,9 @@ pr1_4(Str,Cur_count,Cur_word,Res):-skip_space_marks(Str,Str1),get_word(Str1,Word
 skip_space_marks([H|T],Str1):-(H=32;H=40;H=41;H=43;H=44;H=46;H=47;H=10),skip_space_marks(T,Str1),!.
 skip_space_marks(Str1,Str1).
 
+skip_space([32|T],Str1):-skip_space(T,Str1),!.
+skip_space(Str1,Str1).
+
 %get_word([],[],[]):-!.
 get_word(Str,Word,Str2):-get_word(Str,[],Word,Str2).
 get_word([],Word,Word,[]).
@@ -211,3 +214,30 @@ bubble_count_words_iter([X,Y|T],[Y,X|T]) :- count_words(X,Count_X),count_words(Y
 bubble_count_words_iter([X|T],[X|T1]) :- bubble_count_words_iter(T, T1).
 bubble_count_words(List,List_res) :- bubble_count_words_iter(List, List1), bubble_count_words(List1,List_res),!.
 bubble_count_words(List,List):-!.
+
+%7. Дан список строк из файла. Упорядочить по количеству слов
+% идущих после чисел.
+
+pr7:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr),seen,bubble_count_an(ListStr,Res),write_list_str(Res).
+
+bubble_count_an_iter([X,Y|T],[Y,X|T]) :- count_after_num(X,Count_X),count_after_num(Y,Count_Y), Count_X > Count_Y, !.
+bubble_count_an_iter([X|T],[X|T1]) :- bubble_count_an_iter(T, T1).
+bubble_count_an(List,List_res) :- bubble_count_an_iter(List, List1), bubble_count_an(List1,List_res),!.
+bubble_count_an(List,List):-!.
+
+count_after_num(Str,Count):-count_after_num(Str,0,Count).
+count_after_num([],K,K):-!.
+count_after_num(Str,I,K):-skip_space(Str,Str1),get_num(Str1,_,Str2),skip_space(Str2,Str3),get_word_num(Str3,Word,Str4),(Word\=[]->I1 is I+1,count_after_num(Str4,I1,K);K is I),!.
+count_after_num(Str,I,K):-skip_space(Str,Str1),get_word_num(Str1,_,Str2),count_after_num(Str2,I,K).
+
+%get_word([],[],[]):-!.
+get_num([H|T],Word,Str2):-(H=45;(H>=48,H=<57)),get_num([H|T],[],Word,Str2).
+get_num([],Word,Word,[]).
+get_num([H|T],Word,Word,[H|T]):-not(H=46;(H>=48,H=<57)),!.
+get_num([H|T],Word,Word1,Str2):-append(Word,[H],Word2),get_num(T,Word2,Word1,Str2).
+
+%get_word_num([],[],[]):-!.
+get_word_num(Str,Word,Str2):-get_word_num(Str,[],Word,Str2).
+get_word_num([],Word,Word,[]).
+get_word_num([H|T],Word,Word,[H|T]):-(H=32;(H>=48,H=<57)),!.
+get_word_num([H|T],Word,Word1,Str2):-append(Word,[H],Word2),get_word_num(T,Word2,Word1,Str2).
