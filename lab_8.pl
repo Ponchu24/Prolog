@@ -19,12 +19,12 @@ write_list_str([H|T]):-write_str(H),nl,write_list_str(T).
 write_str([]):-!.
 write_str([H|Tail]):-put(H),write_str(Tail).
 
-%1.1. Дан файл. Прочитать из файла строки и вывести длину наибольшей
-% строки.
+%1.1. Р”Р°РЅ С„Р°Р№Р». РџСЂРѕС‡РёС‚Р°С‚СЊ РёР· С„Р°Р№Р»Р° СЃС‚СЂРѕРєРё Рё РІС‹РІРµСЃС‚Рё РґР»РёРЅСѓ РЅР°РёР±РѕР»СЊС€РµР№
+% СЃС‚СЂРѕРєРё.
 pr1_1:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(_, LengthList),seen,max_member(Max,LengthList),write(Max).
 
-%1.2. Дан файл. Определить, сколько в файле строк, не содержащих
-% пробелы.
+%1.2. Р”Р°РЅ С„Р°Р№Р». РћРїСЂРµРґРµР»РёС‚СЊ, СЃРєРѕР»СЊРєРѕ РІ С„Р°Р№Р»Рµ СЃС‚СЂРѕРє, РЅРµ СЃРѕРґРµСЂР¶Р°С‰РёС…
+% РїСЂРѕР±РµР»С‹.
 pr1_2:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr,_),seen,pr1_2(ListStr,Res),write(Res).
 
 pr1_2(ListStr,Res):-pr1_2(ListStr,0,Res).
@@ -32,8 +32,8 @@ pr1_2([],Res,Res):-!.
 pr1_2([H|T],Cur_res,Res):-not(member(32,H)),Cur_res1 is Cur_res+1,pr1_2(T,Cur_res1,Res),!.
 pr1_2([_|T],Cur_res,Res):-pr1_2(T,Cur_res,Res).
 
-%1.3. Дан файл, найти и вывести на экран только те строки, в которых букв
-% А больше, чем в среднем на строку.
+%1.3. Р”Р°РЅ С„Р°Р№Р», РЅР°Р№С‚Рё Рё РІС‹РІРµСЃС‚Рё РЅР° СЌРєСЂР°РЅ С‚РѕР»СЊРєРѕ С‚Рµ СЃС‚СЂРѕРєРё, РІ РєРѕС‚РѕСЂС‹С… Р±СѓРєРІ
+% Рђ Р±РѕР»СЊС€Рµ, С‡РµРј РІ СЃСЂРµРґРЅРµРј РЅР° СЃС‚СЂРѕРєСѓ.
 
 pr1_3:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr,_),seen,count_A_list(ListStr,Count_A_list),sum_list(Count_A_list,Sum),length(ListStr,Lenght),Sr is Sum/Lenght,pr1_3_write(ListStr,Count_A_list,Sr).
 
@@ -50,7 +50,7 @@ count_A([],Res,Res):-!.
 count_A([H|T],Cur_res,Res):-H=65,Cur_res1 is Cur_res+1,count_A(T,Cur_res1,Res),!.
 count_A([_|T],Cur_res,Res):-count_A(T,Cur_res,Res).
 
-%1.4. Дан файл, вывести самое частое слово.
+%1.4. Р”Р°РЅ С„Р°Р№Р», РІС‹РІРµСЃС‚Рё СЃР°РјРѕРµ С‡Р°СЃС‚РѕРµ СЃР»РѕРІРѕ.
 
 pr1_4:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr),seen,add_enter(ListStr,ListStr1),append(ListStr1,Str),pr1_4(Str,0,[],Res),write_str(Res).
 
@@ -77,8 +77,8 @@ numb_same_words(Word,Str,Count):-numb_same_words(Word,Str,1,Count),!.
 numb_same_words(_,[],Count,Count):-!.
 numb_same_words(Word,Str,Cur_count,Count):-skip_space_marks(Str,Str1),get_word(Str1,Word1,Str2),(Word=Word1->Cur_count1 is Cur_count+1,numb_same_words(Word,Str2,Cur_count1,Count);numb_same_words(Word,Str2,Cur_count,Count)).
 
-%1.5. Дан файл, вывести в отдельный файл строки, состоящие из слов, не
-% повторяющихся в исходном файле.
+%1.5. Р”Р°РЅ С„Р°Р№Р», РІС‹РІРµСЃС‚Рё РІ РѕС‚РґРµР»СЊРЅС‹Р№ С„Р°Р№Р» СЃС‚СЂРѕРєРё, СЃРѕСЃС‚РѕСЏС‰РёРµ РёР· СЃР»РѕРІ, РЅРµ
+% РїРѕРІС‚РѕСЂСЏСЋС‰РёС…СЃСЏ РІ РёСЃС…РѕРґРЅРѕРј С„Р°Р№Р»Рµ.
 
 pr1_5:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr),seen,add_enter(ListStr,ListStr1),append(ListStr1,Str),tell('C:/Users/HP/Documents/Prolog/lab_8#1_5.txt'),pr1_5_write(ListStr,Str),told.
 
@@ -91,13 +91,13 @@ pr1_5_write([_|T],All_str):-pr1_5_write(T,All_str).
 pr1_5_repeat_check([],_):-!.
 pr1_5_repeat_check(Str,All_str):-skip_space_marks(Str,Str1),get_word(Str1,Word,Str2),numb_same_words(Word,All_str,Count),Count=2,pr1_5_repeat_check(Str2,All_str).
 
-%2.5. Дана строка. Необходимо перемешать все символы строки в случайном
-% порядке.
+%2.5. Р”Р°РЅР° СЃС‚СЂРѕРєР°. РќРµРѕР±С…РѕРґРёРјРѕ РїРµСЂРµРјРµС€Р°С‚СЊ РІСЃРµ СЃРёРјРІРѕР»С‹ СЃС‚СЂРѕРєРё РІ СЃР»СѓС‡Р°Р№РЅРѕРј
+% РїРѕСЂСЏРґРєРµ.
 
 pr2_5:-read_str(Str,_,_),random_permutation(Str,Str1),write_str(Str1).
 
-%2.7. Дана строка, состоящая из символов латиницы. Необходимо проверить,
-% образуют ли прописные символы этой строки палиндром.
+%2.7. Р”Р°РЅР° СЃС‚СЂРѕРєР°, СЃРѕСЃС‚РѕСЏС‰Р°СЏ РёР· СЃРёРјРІРѕР»РѕРІ Р»Р°С‚РёРЅРёС†С‹. РќРµРѕР±С…РѕРґРёРјРѕ РїСЂРѕРІРµСЂРёС‚СЊ,
+% РѕР±СЂР°Р·СѓСЋС‚ Р»Рё РїСЂРѕРїРёСЃРЅС‹Рµ СЃРёРјРІРѕР»С‹ СЌС‚РѕР№ СЃС‚СЂРѕРєРё РїР°Р»РёРЅРґСЂРѕРј.
 
 pr2_7:-read_str(Str,_,_),get_prop(Str,Str1),reverse(Str1,Rev_Str1),Str1=Rev_Str1.
 
@@ -106,8 +106,8 @@ get_prop([],Res,Res):-!.
 get_prop([H|T],Cur_res,Res):-H>=65,H=<90,append(Cur_res,[H],Cur_res1),get_prop(T,Cur_res1,Res),!.
 get_prop([_|T],Cur_res,Res):-get_prop(T,Cur_res,Res).
 
-%2.14. Дана строка в которой записаны слова через пробел. Необходимо
-% упорядочить слова по количеству букв в каждом слове.
+%2.14. Р”Р°РЅР° СЃС‚СЂРѕРєР° РІ РєРѕС‚РѕСЂРѕР№ Р·Р°РїРёСЃР°РЅС‹ СЃР»РѕРІР° С‡РµСЂРµР· РїСЂРѕР±РµР». РќРµРѕР±С…РѕРґРёРјРѕ
+% СѓРїРѕСЂСЏРґРѕС‡РёС‚СЊ СЃР»РѕРІР° РїРѕ РєРѕР»РёС‡РµСЃС‚РІСѓ Р±СѓРєРІ РІ РєР°Р¶РґРѕРј СЃР»РѕРІРµ.
 
 pr2_14:-read_str(Str,_,_),split(Str,Str1),bubble(Str1,Res),write_list_str(Res).
 
@@ -126,8 +126,8 @@ bubble_iter([X|T],[X|T1]) :- bubble_iter(T, T1).
 bubble(List,List_res) :- bubble_iter(List, List1), bubble(List1,List_res),!.
 bubble(List,List):-!.
 
-%3. Дана строка. Необходимо найти все даты, которые описаны в
-% виде "31 февраля 2007".
+%3. Р”Р°РЅР° СЃС‚СЂРѕРєР°. РќРµРѕР±С…РѕРґРёРјРѕ РЅР°Р№С‚Рё РІСЃРµ РґР°С‚С‹, РєРѕС‚РѕСЂС‹Рµ РѕРїРёСЃР°РЅС‹ РІ
+% РІРёРґРµ "31 С„РµРІСЂР°Р»СЏ 2007".
 
 pr3:-read_str(Str,_,_),pr3(Str,Res),write_list_str(Res).
 
@@ -157,8 +157,8 @@ month([1086,1082,1090,1103,1073,1088,1103]).
 month([1085,1086,1103,1073,1088,1103]).
 month([1076,1077,1082,1072,1073,1088,1103]).
 
-%4.5. Дана строка. Необходимо найти наибольшее количество идущих
-% подряд символов кириллицы.
+%4.5. Р”Р°РЅР° СЃС‚СЂРѕРєР°. РќРµРѕР±С…РѕРґРёРјРѕ РЅР°Р№С‚Рё РЅР°РёР±РѕР»СЊС€РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РёРґСѓС‰РёС…
+% РїРѕРґСЂСЏРґ СЃРёРјРІРѕР»РѕРІ РєРёСЂРёР»Р»РёС†С‹.
 
 pr4_5:-read_str(Str,_,_),pr4_5(Str,Res),write(Res).
 
@@ -167,8 +167,8 @@ pr4_5([],I,Cur_res,Res):-I>Cur_res->Res is I;Res is Cur_res,!.
 pr4_5([H|T],I,Cur_res,Res):-H>=1040,H=<1103->I1 is I+1,pr4_5(T,I1,Cur_res,Res),!.
 pr4_5([_|T],I,Cur_res,Res):-I>Cur_res->Cur_res1 is I,pr4_5(T,0,Cur_res1,Res);pr4_5(T,0,Cur_res,Res).
 
-%4.7. Дана строка. Необходимо найти минимальное из имеющихся в ней
-%натуральных чисел.
+%4.7. Р”Р°РЅР° СЃС‚СЂРѕРєР°. РќРµРѕР±С…РѕРґРёРјРѕ РЅР°Р№С‚Рё РјРёРЅРёРјР°Р»СЊРЅРѕРµ РёР· РёРјРµСЋС‰РёС…СЃСЏ РІ РЅРµР№
+%РЅР°С‚СѓСЂР°Р»СЊРЅС‹С… С‡РёСЃРµР».
 
 pr4_7:-read_str(Str,_,_),pr4_7(Str,Res),write(Res).
 
@@ -185,8 +185,8 @@ pr4_7([_|T],Num,Cur_res,Res):-number_chars(Number,Num),Number<Cur_res,pr4_7(T,[]
 pr4_7([_|T],_,Cur_res,Res):-pr4_7(T,[],Cur_res,Res).
 
 
-%4.14. Дана строка. Необходимо найти наибольшее количество идущих
-% подряд цифр.
+%4.14. Р”Р°РЅР° СЃС‚СЂРѕРєР°. РќРµРѕР±С…РѕРґРёРјРѕ РЅР°Р№С‚Рё РЅР°РёР±РѕР»СЊС€РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РёРґСѓС‰РёС…
+% РїРѕРґСЂСЏРґ С†РёС„СЂ.
 
 pr4_14:-read_str(Str,_,_),pr4_14(Str,Res),write(Res).
 
@@ -195,13 +195,13 @@ pr4_14([],I,Cur_res,Res):-I>Cur_res->Res is I;Res is Cur_res,!.
 pr4_14([H|T],I,Cur_res,Res):-H>=48,H=<57->I1 is I+1,pr4_14(T,I1,Cur_res,Res),!.
 pr4_14([_|T],I,Cur_res,Res):-I>Cur_res->Cur_res1 is I,pr4_14(T,0,Cur_res1,Res);pr4_14(T,0,Cur_res,Res).
 
-%5. Задание 5 Прочитать список строк из файла. Упорядочить по длине
-% строки.
+%5. Р—Р°РґР°РЅРёРµ 5 РџСЂРѕС‡РёС‚Р°С‚СЊ СЃРїРёСЃРѕРє СЃС‚СЂРѕРє РёР· С„Р°Р№Р»Р°. РЈРїРѕСЂСЏРґРѕС‡РёС‚СЊ РїРѕ РґР»РёРЅРµ
+% СЃС‚СЂРѕРєРё.
 
 pr5:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr),seen,bubble(ListStr,Res),write_list_str(Res).
 
-%6. Задание 6 Дан список строк из файла. Упорядочить по количеству слов в
-% строке.
+%6. Р—Р°РґР°РЅРёРµ 6 Р”Р°РЅ СЃРїРёСЃРѕРє СЃС‚СЂРѕРє РёР· С„Р°Р№Р»Р°. РЈРїРѕСЂСЏРґРѕС‡РёС‚СЊ РїРѕ РєРѕР»РёС‡РµСЃС‚РІСѓ СЃР»РѕРІ РІ
+% СЃС‚СЂРѕРєРµ.
 
 pr6:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr),seen,bubble_count_words(ListStr,Res),write_list_str(Res).
 
@@ -215,8 +215,8 @@ bubble_count_words_iter([X|T],[X|T1]) :- bubble_count_words_iter(T, T1).
 bubble_count_words(List,List_res) :- bubble_count_words_iter(List, List1), bubble_count_words(List1,List_res),!.
 bubble_count_words(List,List):-!.
 
-%7. Дан список строк из файла. Упорядочить по количеству слов
-% идущих после чисел.
+%7. Р”Р°РЅ СЃРїРёСЃРѕРє СЃС‚СЂРѕРє РёР· С„Р°Р№Р»Р°. РЈРїРѕСЂСЏРґРѕС‡РёС‚СЊ РїРѕ РєРѕР»РёС‡РµСЃС‚РІСѓ СЃР»РѕРІ
+% РёРґСѓС‰РёС… РїРѕСЃР»Рµ С‡РёСЃРµР».
 
 pr7:-see('C:/Users/HP/Documents/Prolog/lab_8.txt'),read_list_str(ListStr),seen,bubble_count_an(ListStr,Res),write_list_str(Res).
 
@@ -242,7 +242,7 @@ get_word_num([],Word,Word,[]).
 get_word_num([H|T],Word,Word,[H|T]):-(H=32;(H>=48,H=<57)),!.
 get_word_num([H|T],Word,Word1,Str2):-append(Word,[H],Word2),get_word_num(T,Word2,Word1,Str2).
 
-%8.2. В порядке увеличения среднего веса ASCII-кода символа строки
+%8.2. Р’ РїРѕСЂСЏРґРєРµ СѓРІРµР»РёС‡РµРЅРёСЏ СЃСЂРµРґРЅРµРіРѕ РІРµСЃР° ASCII-РєРѕРґР° СЃРёРјРІРѕР»Р° СЃС‚СЂРѕРєРё
 
 pr8_2:-see('C:/Users/HP/Documents/Prolog/lab_8_8_2.txt'),read_list_str(ListStr),seen,sred_list(ListStr,Sred_list),write(Sred_list),nl,bubble8_2(ListStr,Sred_list,_,Res),write_list_str(Res).
 
@@ -272,9 +272,9 @@ bubble_iter8_2([X|T],[Xs|Ts],[Xs|Ts1],[X|T1]) :- bubble_iter8_2(T,Ts,Ts1,T1).
 bubble8_2(List,Sred,New_sred,List_res) :- bubble_iter8_2(List,Sred,New_sred,List1), bubble8_2(List1,New_sred,_,List_res),!.
 bubble8_2(List,_,_,List):-!.
 
-%8.6. В порядке увеличения медианного значения выборки строк.
-%(прошлое медианное значение удаляется из выборки и производится поиск
-%нового медианного значения).
+%8.6. Р’ РїРѕСЂСЏРґРєРµ СѓРІРµР»РёС‡РµРЅРёСЏ РјРµРґРёР°РЅРЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ РІС‹Р±РѕСЂРєРё СЃС‚СЂРѕРє.
+%(РїСЂРѕС€Р»РѕРµ РјРµРґРёР°РЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ СѓРґР°Р»СЏРµС‚СЃСЏ РёР· РІС‹Р±РѕСЂРєРё Рё РїСЂРѕРёР·РІРѕРґРёС‚СЃСЏ РїРѕРёСЃРє
+%РЅРѕРІРѕРіРѕ РјРµРґРёР°РЅРЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ).
 
 pr8_6:-see('C:/Users/HP/Documents/Prolog/lab_8_8_6.txt'),read_list_str(ListStr),seen,bubble8_6(ListStr,Res),write_list_str(Res).
 
@@ -290,9 +290,9 @@ get_nums([],Res,Res):-!.
 get_nums(Str,Cur_res,Res):-skip_space_marks(Str,Str1),get_num(Str1,Num_code,Str2),Num_code\=[],number_chars(Num,Num_code),append(Cur_res,[Num],Cur_res1),get_nums(Str2,Cur_res1,Res),!.
 get_nums(_,Res,Res):-!.
 
-%8.9. В порядке увеличения квадратичного отклонения между наибольшим
-% ASCII-кодом символа строки и разницы в ASCII-кодах пар зеркально
-% расположенных символов строки (относительно ее середины).
+%8.9. Р’ РїРѕСЂСЏРґРєРµ СѓРІРµР»РёС‡РµРЅРёСЏ РєРІР°РґСЂР°С‚РёС‡РЅРѕРіРѕ РѕС‚РєР»РѕРЅРµРЅРёСЏ РјРµР¶РґСѓ РЅР°РёР±РѕР»СЊС€РёРј
+% ASCII-РєРѕРґРѕРј СЃРёРјРІРѕР»Р° СЃС‚СЂРѕРєРё Рё СЂР°Р·РЅРёС†С‹ РІ ASCII-РєРѕРґР°С… РїР°СЂ Р·РµСЂРєР°Р»СЊРЅРѕ
+% СЂР°СЃРїРѕР»РѕР¶РµРЅРЅС‹С… СЃРёРјРІРѕР»РѕРІ СЃС‚СЂРѕРєРё (РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РµРµ СЃРµСЂРµРґРёРЅС‹).
 
 pr8_9:-see('C:/Users/HP/Documents/Prolog/lab_8_8_9.txt'),read_list_str(ListStr),seen,all_kvad_ot(ListStr,Kvad_ot_list),bubble8_9(ListStr,Kvad_ot_list,_,Res),write_list_str(Res).
 
@@ -313,9 +313,9 @@ bubble_iter8_9([X|T],[Xk|Tk],[Xk|Tk1],[X|T1]) :- bubble_iter8_9(T,Tk,Tk1,T1).
 bubble8_9(List,Kvad,New_kvad,List_res) :- bubble_iter8_9(List,Kvad,New_kvad,List1), bubble8_9(List1,New_kvad,_,List_res),!.
 bubble8_9(List,_,_,List):-!.
 
-%8.12. В порядке увеличение квадратичного отклонения частоты
-% встречаемости самого распространенного символа в наборе строк от
-% частоты его встречаемости в данной строке
+%8.12. Р’ РїРѕСЂСЏРґРєРµ СѓРІРµР»РёС‡РµРЅРёРµ РєРІР°РґСЂР°С‚РёС‡РЅРѕРіРѕ РѕС‚РєР»РѕРЅРµРЅРёСЏ С‡Р°СЃС‚РѕС‚С‹
+% РІСЃС‚СЂРµС‡Р°РµРјРѕСЃС‚Рё СЃР°РјРѕРіРѕ СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅРµРЅРЅРѕРіРѕ СЃРёРјРІРѕР»Р° РІ РЅР°Р±РѕСЂРµ СЃС‚СЂРѕРє РѕС‚
+% С‡Р°СЃС‚РѕС‚С‹ РµРіРѕ РІСЃС‚СЂРµС‡Р°РµРјРѕСЃС‚Рё РІ РґР°РЅРЅРѕР№ СЃС‚СЂРѕРєРµ
 
 pr8_12:-see('C:/Users/HP/Documents/Prolog/lab_8_8_12.txt'),read_list_str(ListStr),seen,append(ListStr,AllStr),max_count(AllStr,S,Sc),all_kvad_ot12(ListStr,Sc,S,Kvad),bubble8_9(ListStr,Kvad,_,Res),write_list_str(Res).
 
