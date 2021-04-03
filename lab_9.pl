@@ -20,45 +20,48 @@ del_all([_|T],El,T1):-del_all(T,El,T1).
 %1.1. Дано множество. Построить все размещения с повторениями по k
 % элементов.
 
-pr1_1:-read_str(A,_),read(K),k_arr_rep(A,K,[]).
+pr1_1:-read_str(A,_),read(K),tell('C:/Users/HP/Documents/Prolog/lab9files/1_1.txt'),not(k_arr_rep(A,K,[])),told.
 
 k_arr_rep(_,0,Perm):-write_str(Perm),nl,!,fail.
 k_arr_rep(A,N,Perm):-in_list(A,El),N1 is N-1,k_arr_rep(A,N1,[El|Perm]).
 
 %1.2. Дано множество. Построить все перестановки.
 
-pr1_2:-read_str(A,_),perm(A,[]).
+pr1_2:-read_str(A,_),tell('C:/Users/HP/Documents/Prolog/lab9files/1_2.txt'),not(perm(A,[])),told.
 
 perm([],Perm):-write_str(Perm),nl,!,fail.
 perm(A,Perm):-in_list_exlude(A,El,A1),perm(A1,[El|Perm]).
 
 %1.3. Дано множество. Построить все размещения по k элементов.
 
-pr1_3:-read_str(A,_),read(K),k_arr(A,K,[]).
+pr1_3:-read_str(A,_),read(K),tell('C:/Users/HP/Documents/Prolog/lab9files/1_3.txt'),not(k_arr(A,K,[])),told.
 
 k_arr(_,0,Perm):-write_str(Perm),nl,!,fail.
 k_arr(A,N,Perm):-in_list_exlude(A,El,A1),N1 is N-1,k_arr(A1,N1,[El|Perm]).
 
 %1.4. Дано множество. Построить все подмножества.
 
-pr1_4:-read_str(A,_),sub(A,Sub),write_str(Sub),nl,fail.
+pr1_4:-read_str(A,_),tell('C:/Users/HP/Documents/Prolog/lab9files/1_4.txt'),not(sub(A)),told.
 
+sub(A):-sub(A,Sub),write_str(Sub),nl,fail.
 sub([],[]).
 sub([H|List],[H|Sub]):-sub(List,Sub).
 sub([_|List],Sub):-sub(List,Sub).
 
 %1.5. Дано множество. Построить все сочетания по k элементов.
 
-pr1_5:-read_str(A,_),read(K),k_perm(A,K,K_perms),write_str(K_perms),nl,fail.
+pr1_5:-read_str(A,_),read(K),tell('C:/Users/HP/Documents/Prolog/lab9files/1_5.txt'),not(k_perm(A,K)),told.
 
+k_perm(A,K):-k_perm(A,K,K_perms),write_str(K_perms),nl,fail.
 k_perm(_,0,[]):-!.
 k_perm([H|List],K,[H|Sub]):-K1 is K-1,k_perm(List,K1,Sub).
 k_perm([_|List],K,Sub):-k_perm(List,K,Sub).
 
 %1.6. Дано множество. Построить все сочетания с повторениями.
 
-pr1_6:-read_str(A,_),read(K),k_perm_rep(A,K,K_perms),write_str(K_perms),nl,fail.
+pr1_6:-read_str(A,_),read(K),tell('C:/Users/HP/Documents/Prolog/lab9files/1_6.txt'),not(k_perm_rep(A,K)),told.
 
+k_perm_rep(A,K):-k_perm_rep(A,K,K_perms),write_str(K_perms),nl,fail.
 k_perm_rep(_,0,[]):-!.
 k_perm_rep([H|List],K,[H|Sub]):-K1 is K-1,k_perm_rep([H|List],K1,Sub).
 k_perm_rep([_|List],K,Sub):-k_perm_rep(List,K,Sub).
@@ -152,3 +155,9 @@ word_more_2a(A,N,Perm):-in_list(A,El),N1 is N-1,word_more_2a(A,N1,[El|Perm]).
 count_more_X(List,X):-count_more_X(List,X,List).
 count_more_X(List,X,[H|_]):-count_symb(List,H,C),C>X,!.
 count_more_X(List,X,[_|T]):-count_more_X(List,X,T).
+
+%9. Дано множество {a,b,c,d,e,f}. Построить все слова длины 7, в
+% которых больше двух букв а. Вывод в файл.
+
+pr9:-A=[a,b,c,d,e,f],tell('C:/Users/HP/Documents/Prolog/lab9files/9.txt'),not(word_more_2a(A,7,[])),told.
+
