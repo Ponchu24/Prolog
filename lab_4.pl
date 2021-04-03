@@ -50,10 +50,11 @@ swap_list([],Cur_list,Cur_list):-!.
 swap_list([H|T],Cur_list,Res_list):-swap_list(T,[H|Cur_list],Res_list).
 
 %11
-p(Sublist,List):-p(Sublist,Sublist,List).
-p(_,[],_):-!.
-p(_,Sublist,List):-Sublist=List,!.
-p([SH|ST],[Cur_SH|Cur_ST],[LH|LT]):-(Cur_SH=LH -> p([SH|ST],Cur_ST,LT);SH=Cur_SH,p([SH|ST],[Cur_SH|ST],LT)).
+%p(Sublist,List):-p(Sublist,Sublist,List).
+%p(_,[],_):-!.
+%p(_,Sublist,List):-Sublist=List,!.
+% p([SH|ST],[Cur_SH|Cur_ST],[LH|LT]):-(Cur_SH=LH ->
+% p([SH|ST],Cur_ST,LT);SH=Cur_SH,p([SH|ST],[Cur_SH|ST],LT)).
 
 %12
 del_num([_|T],0,T):-!.
@@ -172,3 +173,10 @@ p18_59([],List,List):-p18_59_write(List),!.
 p18_59([H|T],List,Res):-H>=0,H<100,more_than_one(T,H),del_all(T,H,T1),H1 is H*H,append1([H1],List,List1),p18_59(T1,List1,Res),!.
 p18_59([_|T],List,Res):-p18_59(T,List,Res).
 p18_59_write(Res):-write("Result = "),write(Res),!.
+
+%11. Исправление.
+
+pr11(_,[]):-!.
+pr11([],Sub):-Sub\=[],fail.
+pr11([H1|T1],[H1|T2]):-pr11(T1,T2),!.
+pr11([_|T1],[H2|T2]):-pr11(T1,[H2|T2]).
