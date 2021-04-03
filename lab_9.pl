@@ -169,3 +169,12 @@ pr10:-A=[a,b,c,d,e,f],tell('C:/Users/HP/Documents/Prolog/lab9files/10.txt'),not(
 
 word_4let(_,0,[H1|T1]):-!,del_all([H1|T1],H1,[H2|T2]),del_all([H2|T2],H2,[H3|T3]),del_all([H3|T3],H3,[H4|T4]),del_all([H4|T4],H4,Str),[H4|T4]\=[],Str=[],write_str([H1|T1]),nl,fail.
 word_4let(A,N,Perm):-in_list(A,El),N1 is N-1,word_4let(A,N1,[El|Perm]).
+
+%11_11. Составить предикат средствами SWI-Prolog, который составляет и выводит
+% в файл все слова алфавита {a,b,c,d,e,f} длины 8, состоящих из 3
+% различных букв.
+
+pr11_11:-A=[a,b,c,d,e,f],tell('C:/Users/HP/Documents/Prolog/lab9files/11.txt'),not(word_3let(A,8,[])),told.
+
+word_3let(_,0,[H1|T1]):-!,del_all([H1|T1],H1,[H2|T2]),del_all([H2|T2],H2,[H3|T3]),del_all([H3|T3],H3,Str),[H3|T3]\=[],Str=[],write_str([H1|T1]),nl,fail.
+word_3let(A,N,Perm):-in_list(A,El),N1 is N-1,word_3let(A,N1,[El|Perm]).
