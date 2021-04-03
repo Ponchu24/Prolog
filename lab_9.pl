@@ -161,3 +161,11 @@ count_more_X(List,X,[_|T]):-count_more_X(List,X,T).
 
 pr9:-A=[a,b,c,d,e,f],tell('C:/Users/HP/Documents/Prolog/lab9files/9.txt'),not(word_more_2a(A,7,[])),told.
 
+%10. Дано множество {a,b,c,d,e,f}. Построить все слова длины 7, в
+% которых ровно 4 различных буквы. Минимизировать перебор*. Вывод в
+% файл.
+
+pr10:-A=[a,b,c,d,e,f],tell('C:/Users/HP/Documents/Prolog/lab9files/10.txt'),not(word_4let(A,7,[])),told.
+
+word_4let(_,0,[H1|T1]):-!,del_all([H1|T1],H1,[H2|T2]),del_all([H2|T2],H2,[H3|T3]),del_all([H3|T3],H3,[H4|T4]),del_all([H4|T4],H4,Str),[H4|T4]\=[],Str=[],write_str([H1|T1]),nl,fail.
+word_4let(A,N,Perm):-in_list(A,El),N1 is N-1,word_4let(A,N1,[El|Perm]).
